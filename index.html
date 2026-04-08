@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://unestimated-nonelusive-tam.ngrok-free.dev/ -->
+<html class="light" lang="en" data-qb-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NetQoS Optimizer</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-tertiary-fixed-variant": "var(--on-tertiary-fixed-variant)",
+          "inverse-primary": "var(--inverse-primary)",
+          "surface-container-lowest": "var(--surface-container-lowest)",
+          "on-error-container": "var(--on-error-container)",
+          "on-secondary-fixed": "var(--on-secondary-fixed)",
+          "secondary-fixed": "var(--secondary-fixed)",
+          "on-tertiary-fixed": "var(--on-tertiary-fixed)",
+          "on-primary-fixed": "var(--on-primary-fixed)",
+          "on-secondary-fixed-variant": "var(--on-secondary-fixed-variant)",
+          "on-secondary-container": "var(--on-secondary-container)",
+          "on-background": "var(--on-background)",
+          "tertiary": "var(--tertiary)",
+          "primary": "var(--primary)",
+          "surface-container-highest": "var(--surface-container-highest)",
+          "outline": "var(--outline)",
+          "error": "var(--error)",
+          "on-primary-container": "var(--on-primary-container)",
+          "surface": "var(--surface)",
+          "primary-fixed-dim": "var(--primary-fixed-dim)",
+          "surface-dim": "var(--surface-dim)",
+          "primary-fixed": "var(--primary-fixed)",
+          "on-primary": "var(--on-primary)",
+          "secondary-fixed-dim": "var(--secondary-fixed-dim)",
+          "surface-variant": "var(--surface-variant)",
+          "on-surface-variant": "var(--on-surface-variant)",
+          "inverse-on-surface": "var(--inverse-on-surface)",
+          "error-container": "var(--error-container)",
+          "surface-bright": "var(--surface-bright)",
+          "on-primary-fixed-variant": "var(--on-primary-fixed-variant)",
+          "on-secondary": "var(--on-secondary)",
+          "on-tertiary-container": "var(--on-tertiary-container)",
+          "surface-container-low": "var(--surface-container-low)",
+          "on-error": "var(--on-error)",
+          "surface-tint": "var(--surface-tint)",
+          "on-tertiary": "var(--on-tertiary)",
+          "on-surface": "var(--on-surface)",
+          "secondary": "var(--secondary)",
+          "tertiary-fixed-dim": "var(--tertiary-fixed-dim)",
+          "tertiary-container": "var(--tertiary-container)",
+          "background": "var(--background)",
+          "inverse-surface": "var(--inverse-surface)",
+          "surface-container": "var(--surface-container)",
+          "secondary-container": "var(--secondary-container)",
+          "surface-container-high": "var(--surface-container-high)",
+          "primary-container": "var(--primary-container)",
+          "outline-variant": "var(--outline-variant)"
+        },
+        borderRadius: {
+          "DEFAULT": "1rem",
+          "lg": "2rem",
+          "xl": "3rem",
+          "full": "9999px"
+        },
+        fontFamily: {
+          "headline": ["Manrope"],
+          "body": ["Inter"],
+          "label": ["Inter"]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  :root {
+    --on-tertiary-fixed-variant: #584400;
+    --inverse-primary: #adc6ff;
+    --surface-container-lowest: #ffffff;
+    --on-error-container: #93000a;
+    --on-secondary-fixed: #002107;
+    --secondary-fixed: #72fe88;
+    --on-tertiary-fixed: #241a00;
+    --on-primary-fixed: #001a41;
+    --on-secondary-fixed-variant: #00531c;
+    --on-secondary-container: #00732a;
+    --on-background: #191c1d;
+    --tertiary: #745b00;
+    --primary: #0058bc;
+    --surface-container-highest: #e1e3e4;
+    --outline: #717786;
+    --error: #ba1a1a;
+    --on-primary-container: #fefcff;
+    --surface: #f8f9fa;
+    --primary-fixed-dim: #adc6ff;
+    --surface-dim: #d9dadb;
+    --primary-fixed: #d8e2ff;
+    --on-primary: #ffffff;
+    --secondary-fixed-dim: #53e16f;
+    --surface-variant: #e1e3e4;
+    --on-surface-variant: #414755;
+    --inverse-on-surface: #f0f1f2;
+    --error-container: #ffdad6;
+    --surface-bright: #f8f9fa;
+    --on-primary-fixed-variant: #004493;
+    --on-secondary: #ffffff;
+    --on-tertiary-container: #4f3d00;
+    --surface-container-low: #f3f4f5;
+    --on-error: #ffffff;
+    --surface-tint: #005bc1;
+    --on-tertiary: #ffffff;
+    --on-surface: #191c1d;
+    --secondary: #006e28;
+    --tertiary-fixed-dim: #f1c100;
+    --tertiary-container: #d0a600;
+    --background: #f8f9fa;
+    --inverse-surface: #2e3132;
+    --surface-container: #edeeef;
+    --secondary-container: #6ffb85;
+    --surface-container-high: #e7e8e9;
+    --primary-container: #0070eb;
+    --outline-variant: #c1c6d7;
+  }
+  html.dark {
+    --surface-container-lowest: #0b0f14;
+    --surface-container-low: #11151a;
+    --surface-container: #161b22;
+    --surface-container-high: #1d232c;
+    --surface-container-highest: #232933;
+    --surface: #0b0f14;
+    --surface-bright: #161b22;
+    --surface-dim: #050709;
+    --background: #0b0f14;
+    --on-surface: #e5e7eb;
+    --on-surface-variant: #9ca3af;
+    --on-background: #e5e7eb;
+    --outline: #6b7280;
+    --outline-variant: #374151;
+    --primary: #60a5fa;
+    --on-primary: #002d6b;
+    --primary-container: #1d4ed8;
+    --on-primary-container: #dbeafe;
+    --secondary: #4ade80;
+    --on-secondary: #003911;
+    --secondary-container: #166534;
+    --on-secondary-container: #dcfce7;
+    --tertiary: #facc15;
+    --on-tertiary: #3d2f00;
+    --tertiary-container: #854d0e;
+    --on-tertiary-container: #fef08a;
+    --error: #fca5a5;
+    --on-error: #690005;
+    --error-container: #7f1d1d;
+    --on-error-container: #fee2e2;
+  }
+
+  body { font-family: 'Inter', sans-serif; background-color: var(--surface); color: var(--on-surface); }
+  .font-headline { font-family: 'Manrope', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .glass-panel { backdrop-filter: blur(16px); }
+
+  /* Range slider thumb */
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px; width: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    border: 3px solid var(--surface-container-lowest);
+    box-shadow: 0 0 10px rgba(0,88,188,0.25);
+  }
+  input[type=range] { -webkit-appearance: none; appearance: none; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--surface-container-highest); border-radius: 10px; }
+
+  /* Page transitions */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* Packet card slide-in */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .packet-card { animation: slideIn 0.25s ease both; }
+
+  /* Spinner */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner { animation: spin 0.8s linear infinite; }
+
+  /* Progress bar fill animation */
+  @keyframes fillBar { from { width: 0; } }
+  .fill-animate { animation: fillBar 0.7s cubic-bezier(.4,0,.2,1) both; }
+
+  /* Toggle */
+  .toggle-track { transition: background 0.2s; }
+  .toggle-thumb { transition: transform 0.2s; }
+  .toggle-on .toggle-track { background: #0058bc; }
+  .toggle-on .toggle-thumb { transform: translateX(24px); }
+
+  /* Number input spinner removal */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}[type='text'],input:where(:not([type])),[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select{-webkit-appearance:none;appearance:none;background-color:#fff;border-color:#6b7280;border-width:1px;border-radius:0px;padding-top:0.5rem;padding-right:0.75rem;padding-bottom:0.5rem;padding-left:0.75rem;font-size:1rem;line-height:1.5rem;--tw-shadow:0 0 #0000;}[type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);border-color:#2563eb}input::placeholder,textarea::placeholder{color:#6b7280;opacity:1}::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-date-and-time-value{min-height:1.5em;text-align:inherit}::-webkit-datetime-edit{display:inline-flex}::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field{padding-top:0;padding-bottom:0}select{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");background-position:right 0.5rem center;background-repeat:no-repeat;background-size:1.5em 1.5em;padding-right:2.5rem;print-color-adjust:exact}[multiple],[size]:where(select:not([size="1"])){background-image:initial;background-position:initial;background-repeat:unset;background-size:initial;padding-right:0.75rem;print-color-adjust:unset}[type='checkbox'],[type='radio']{-webkit-appearance:none;appearance:none;padding:0;print-color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;user-select:none;flex-shrink:0;height:1rem;width:1rem;color:#2563eb;background-color:#fff;border-color:#6b7280;border-width:1px;--tw-shadow:0 0 #0000}[type='checkbox']{border-radius:0px}[type='radio']{border-radius:100%}[type='checkbox']:focus,[type='radio']:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:2px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)}[type='checkbox']:checked,[type='radio']:checked{border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat}[type='checkbox']:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");}@media (forced-colors: active) {[type='checkbox']:checked{-webkit-appearance:auto;appearance:auto}}[type='radio']:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");}@media (forced-colors: active) {[type='radio']:checked{-webkit-appearance:auto;appearance:auto}}[type='checkbox']:checked:hover,[type='checkbox']:checked:focus,[type='radio']:checked:hover,[type='radio']:checked:focus{border-color:transparent;background-color:currentColor}[type='checkbox']:indeterminate{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:center;background-repeat:no-repeat;}@media (forced-colors: active) {[type='checkbox']:indeterminate{-webkit-appearance:auto;appearance:auto}}[type='checkbox']:indeterminate:hover,[type='checkbox']:indeterminate:focus{border-color:transparent;background-color:currentColor}[type='file']{background:unset;border-color:inherit;border-width:0;border-radius:0;padding:0;font-size:unset;line-height:inherit}[type='file']:focus{outline:1px solid ButtonText;outline:1px auto -webkit-focus-ring-color}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.left-0{left:0px}.left-3{left:0.75rem}.right-0{right:0px}.top-0{top:0px}.top-1\/2{top:50%}.z-40{z-index:40}.z-50{z-index:50}.col-span-12{grid-column:span 12 / span 12}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.ml-64{margin-left:16rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-8{height:2rem}.h-full{height:100%}.h-screen{height:100vh}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-2{width:0.5rem}.w-4{width:1rem}.w-64{width:16rem}.w-8{width:2rem}.w-\[calc\(100\%-16rem\)\]{width:calc(100% - 16rem)}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-md{max-width:28rem}.flex-1{flex:1 1 0%}.-translate-y-1\/2{--tw-translate-y:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.appearance-none{-webkit-appearance:none;appearance:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-outline-variant\/10 > :not([hidden]) ~ :not([hidden]){border-color:rgb(193 198 215 / 0.1)}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:2rem}.rounded-sm{border-radius:0.125rem}.rounded-xl{border-radius:3rem}.border-4{border-width:4px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-none{border-style:none}.border-outline-variant\/10{border-color:rgb(193 198 215 / 0.1)}.border-outline-variant\/20{border-color:rgb(193 198 215 / 0.2)}.border-outline-variant\/30{border-color:rgb(193 198 215 / 0.3)}.border-primary\/30{border-color:rgb(0 88 188 / 0.3)}.border-white\/30{border-color:rgb(255 255 255 / 0.3)}.border-t-primary{--tw-border-opacity:1;border-top-color:rgb(0 88 188 / var(--tw-border-opacity, 1))}.border-t-white{--tw-border-opacity:1;border-top-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.bg-error-container{--tw-bg-opacity:1;background-color:rgb(255 218 214 / var(--tw-bg-opacity, 1))}.bg-outline{--tw-bg-opacity:1;background-color:rgb(113 119 134 / var(--tw-bg-opacity, 1))}.bg-primary{--tw-bg-opacity:1;background-color:rgb(0 88 188 / var(--tw-bg-opacity, 1))}.bg-secondary-container{--tw-bg-opacity:1;background-color:rgb(111 251 133 / var(--tw-bg-opacity, 1))}.bg-slate-50\/80{background-color:rgb(248 250 252 / 0.8)}.bg-surface{--tw-bg-opacity:1;background-color:rgb(248 249 250 / var(--tw-bg-opacity, 1))}.bg-surface-container{--tw-bg-opacity:1;background-color:rgb(237 238 239 / var(--tw-bg-opacity, 1))}.bg-surface-container-highest{--tw-bg-opacity:1;background-color:rgb(225 227 228 / var(--tw-bg-opacity, 1))}.bg-surface-container-highest\/80{background-color:rgb(225 227 228 / 0.8)}.bg-surface-container-low{--tw-bg-opacity:1;background-color:rgb(243 244 245 / var(--tw-bg-opacity, 1))}.bg-surface-container-lowest{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-tertiary-container{--tw-bg-opacity:1;background-color:rgb(208 166 0 / var(--tw-bg-opacity, 1))}.bg-transparent{background-color:transparent}.bg-white\/50{background-color:rgb(255 255 255 / 0.5)}.bg-tertiary{--tw-bg-opacity:1;background-color:rgb(116 91 0 / var(--tw-bg-opacity, 1))}.bg-error{--tw-bg-opacity:1;background-color:rgb(186 26 26 / var(--tw-bg-opacity, 1))}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-primary{--tw-gradient-from:#0058bc var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 88 188 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-primary-container{--tw-gradient-to:#0070eb var(--tw-gradient-to-position)}.p-2{padding:0.5rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-2{padding-bottom:0.5rem}.pb-4{padding-bottom:1rem}.pl-10{padding-left:2.5rem}.pr-1{padding-right:0.25rem}.pr-4{padding-right:1rem}.pt-16{padding-top:4rem}.pt-2{padding-top:0.5rem}.pt-4{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-body{font-family:Inter}.font-headline{font-family:Manrope}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-\[10px\]{font-size:10px}.text-\[14px\]{font-size:14px}.text-\[18px\]{font-size:18px}.text-\[20px\]{font-size:20px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-error{--tw-text-opacity:1;color:rgb(186 26 26 / var(--tw-text-opacity, 1))}.text-on-error-container{--tw-text-opacity:1;color:rgb(147 0 10 / var(--tw-text-opacity, 1))}.text-on-secondary-container{--tw-text-opacity:1;color:rgb(0 115 42 / var(--tw-text-opacity, 1))}.text-on-surface{--tw-text-opacity:1;color:rgb(25 28 29 / var(--tw-text-opacity, 1))}.text-on-surface-variant{--tw-text-opacity:1;color:rgb(65 71 85 / var(--tw-text-opacity, 1))}.text-on-tertiary-container{--tw-text-opacity:1;color:rgb(79 61 0 / var(--tw-text-opacity, 1))}.text-outline{--tw-text-opacity:1;color:rgb(113 119 134 / var(--tw-text-opacity, 1))}.text-primary{--tw-text-opacity:1;color:rgb(0 88 188 / var(--tw-text-opacity, 1))}.text-secondary{--tw-text-opacity:1;color:rgb(0 110 40 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-tertiary{--tw-text-opacity:1;color:rgb(116 91 0 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.opacity-30{opacity:0.3}.opacity-60{opacity:0.6}.opacity-50{opacity:0.5}.shadow-\[0_0_10px_rgba\(0\2c 88\2c 188\2c 0\.3\)\]{--tw-shadow:0 0 10px rgba(0,88,188,0.3);--tw-shadow-colored:0 0 10px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_12px_rgba\(0\2c 88\2c 188\2c 0\.35\)\]{--tw-shadow:0 0 12px rgba(0,88,188,0.35);--tw-shadow-colored:0 0 12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_4px_20px_rgba\(0\2c 110\2c 40\2c 0\.06\)\]{--tw-shadow:0 4px 20px rgba(0,110,40,0.06);--tw-shadow-colored:0 4px 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_4px_20px_rgba\(0\2c 88\2c 188\2c 0\.05\)\]{--tw-shadow:0 4px 20px rgba(0,88,188,0.05);--tw-shadow-colored:0 4px 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_4px_20px_rgba\(0\2c 88\2c 188\2c 0\.06\)\]{--tw-shadow:0 4px 20px rgba(0,88,188,0.06);--tw-shadow-colored:0 4px 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_4px_20px_rgba\(186\2c 26\2c 26\2c 0\.05\)\]{--tw-shadow:0 4px 20px rgba(186,26,26,0.05);--tw-shadow-colored:0 4px 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_4px_20px_rgba\(186\2c 26\2c 26\2c 0\.06\)\]{--tw-shadow:0 4px 20px rgba(186,26,26,0.06);--tw-shadow-colored:0 4px 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:scale-\[1\.02\]:hover{--tw-scale-x:1.02;--tw-scale-y:1.02;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-primary\/90:hover{background-color:rgb(0 88 188 / 0.9)}.hover\:bg-slate-100:hover{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.hover\:bg-surface-container:hover{--tw-bg-opacity:1;background-color:rgb(237 238 239 / var(--tw-bg-opacity, 1))}.hover\:bg-white\/40:hover{background-color:rgb(255 255 255 / 0.4)}.hover\:text-slate-900:hover{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-primary\/20:focus{--tw-ring-color:rgb(0 88 188 / 0.2)}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width: 768px){.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-7{grid-column:span 7 / span 7}}</style><style type="text/css">#screenShotContainer{cursor:crosshair;left:0;position:absolute;top:0}#toolPanel{background:#fff;border-radius:6px;box-sizing:content-box;height:24px;left:0;min-width:392px;padding:6px 14px;position:absolute;top:0;z-index:9999}#toolPanel .item-panel{float:left;height:24px;margin-right:15px;width:24px}#toolPanel .item-panel:last-child{margin-right:0}#toolPanel .square{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHfSURBVHgB7ZpNboJAFMffY2hK/EhYWl3U3sSeQG/gEeoNxBvYI/QGeoLak9SVdSeNxlKFeR2atPEjDGiaCNP3S1jAvCHzG4ZhwR+AYRiGyS8I5+DUmnBpnMAH3/fhRLILO7WWEFZXdekAkAu5AJUwjaJIDiCYTzP1yFJklep9RPAgxxCBJ9ezQVqdSCsogmyMGmMLr6pA2+WLtk7XGL+rahm/QoFAlPfhaj5Jard1nZVs//iG9GiHNIQLEwnhElJHLeW9MRLF+wxM4BxEubEQ5Tr9HHal7kHOsCuN4e4Y1bHQ1VuJLW7TPdyNw8/tCHJGGEaHq80F5+Y2qT5ZOAiOPz3C1s5eEbDgn8HCpsPCpsPCpsPCpsPCpsPCpsPCpsPCpsPCpsPCpsPCpsPCpsPCpsPCpsPCplN8YSGO/2M7H+9J5Zof4nHuCfeCX7aAHuQMi6h9cEkbWNOGWojkGBG7v+eAPatU9+V2O1Yze3IK7q+xhHhAoMOHoI1laGNLdqXWIrKeoUBEkbzTpfK0wTS5WU3FdTWelBYUAEQYyPWb9gmnJvHkZjkpgnQsG65mXmodZOU7lYeeeo/bGEeDcgCpDUqNZYQon3Tpu13Oiw+7rusEzsWlg4wJWoZhGKYofAHzGYh5VvrALQAAAABJRU5ErkJggg==");background-size:cover}#toolPanel .square-active,#toolPanel .square:active,#toolPanel .square:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGzSURBVHgB7ZpBSsNAFIb/GYq6zA3Um+gJ9Abisoi0nqDJCVSKdCOIN2hPYI/gDfQGVtyUQjO+qRaaNDOZFqGT5/sWhWTmlfmGycsiPyAIgiDEi8I2DMwRds0UE9yoCTYkXLhvTtDCBeY4p6oEMWBIWmGIGTKSfw8pCRN+MD36TREzmtbXVlndtHrhJsguCZD2C9/Ss7qHNzSJHKe4VmPXcMtXS7K9irv3tJN32DU59ZGc+okurVFTnwHGrjK/MOgPi2S4Uini4ZWaaUKSnZV7ds2XrgLtGqDjbDtxuRsPERuttdOW4NEcuqa7hQ8qXj37+EDD0fhniDB3RJg7IswdEeaOCHNHhLkjwtwRYe6IMHdEmDsizB0R5o4Ic0eEuSPC3Gm+cF7xHfsLn67pbuH2IvdUDH7N0EV8nJWuvYE1f8bDYAS1CIksr7sYmAnt6oi2auMU3J9j0FmsqYg3luGPLdn0ncYLmoTG8e/pdAz7sHmnHLXptojIfLKWsOhh36Rreaj4CIpUhYdLbYJ2jpQqbJOII1z601SHdAqffem7VbaLDz+ZBNMIpNthCVpBEAShKXwDKrBaATx5xUUAAAAASUVORK5CYII=")}#toolPanel .round{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAVoSURBVHgB7Zq9UiNHEMd7ZiWBETbrq3IVB8neG4jM2UHmzFzo6LgnAEcOBU9geIITkS9DhI4QT2De4NaBT1Q5sKhDcMdqpt2zaxntaPZL2pWWK/0iGM3s6q/u+epugAULFix4QjCYBdXvGlCzGhy5wxmuITA7eDn2JLIbCXgF3sAF7+8rKJhiBNu2zT9/tcc4/AjAGwBopx+MHRpzKoTowKdrF3ImX8HL69uWxZr02G3IA8S2kHhCwjuQE/kIzlvoGNgRAt/kYfHpBCvX9epNmosHSV0R0WUMXHql+9gINjC0aU436Iskuj2953jQ7/4MUzC54OV1x+L8gp7gmD5GgB49vA0gL0X1Uxt6vV7i8yzYDryEvY7p6Qohdya19mSCfRe2zkyLkRLKGZwMKnfHiSKjn++LR2RNxphj6NFjTL4a3Gaf25kFW/VN+vWxZXwYg6OphBqorG4cIkLT/KncE/3rU8hANsG+ZcmNNRDQlcBfQf+vYvZRsjjn7MJkbbL0ThZL87QdAzdTbqyDp7J6v1WYWAXNV1lb2qJftj32duRn6rtBSlJb2FrZeD++QOGp6Hf3YIZY9ectw6LmiurdVpqpZEEKeH3zV5qfP4Qa6dcWd92fYMagd9vmtdUXJLox0mxbsrIsvdvfk8YnW9h3Zf4+9FI1Z5Ub57g4ZcJ2bP7w+Q99TqeZz4lzmE5Qb/U2KXBnbmIVPbdnMVokNdQ2ljQ0XjCtyvpxUW09RRzqs+LRIknb1VG4lW1XVtV3jiZWMJ2k9kf/V648uP1wCCVB1mrHJDLkaUlWjhaslnoGu6NNdJY9gjJBrk1n9JNwI3kknfGjhkQKpj13W28TAjpQMkxWVnfxqP4xLi31va5Vhrk7hm9leT7aFAQezMQI1u+28hJKCmO8o7U0ovqaBdc3xwaU0Z2HiGpVP3LafhzNgFGwxaWjNfVK6c5DfLdWwYVHrFotvWAUuktg4dHEaWEM3dH/afV2TP14xOjwso5wAyWHLPxnqIGZI6VmwSjDnRn7B54YDNiaqT39ffgLIcKl+fwuBhOiW5SOwcZpGOHSqAk2LwClQp+zyIxGMwqme6artThQenhoZ2EwMO4sRsECQO/sxB3I544f0wpbWHjhbWqI2aX9gFzYJSyvvgslxXTRicpExl0etAH4EkqL/t1UBtJMpGCUcK417ZbSrYMQ7V64ESOD85GC5dJSS2uiwNnKAZSMrPf2aJemA7nuGhTP2i+dlRGb2v/ncRed2JMWHcj1kE6prMxXNpp6coBxPI4bkxiXpkj/hR4M4OBtef3i6zFiMcTL/cR5v7sTNyzxLG2wMkions3Vtendfm5aw68SSCAx1SIfbl1r6Ztv6c/vR1/JZXUdvY/nMAcs/uw38s3R76MMcyLvrt8ljU2XTItIbRAt0f+Q+KvmCa9vvGXaNuSnfvrdF6nGp+mkVmwpKb0CYwfyPWvl+WzcW9WTGMVCz0/9pCRTQlylMSgfe2H4aKq6i0QoqGghnpnqSbImxFOlS4eo+cxrdQqlMP1cbVOG/oBVv6Z05sf8wrnKqvzZL5zBOxI75kUc2JtBv9vO8siJiloCS5uLWgiXHns0VSWdEvqwsk9rxkF04cyMilr+J6buYoQWveIylXi1DnjLuxbwl4EHmYNw/gKl5uxMy5ZGqKxuHlNIdD+5p1rw6AaGFONmo4sfOhRxdBJ+uOAJtPUMKveH0+Sm8yo9dILEeXGlh+oANIkL6+Qj+D/8uS0pp6ylWScnP6FDiikffiwjfJ3F6kG5Il6pu7hcum8VUVYxkwLxKu2jkvJVKoXDg2LSteDleCMpukh7qcvBuvKKrPVasGDBgqfIvzowNmTgJi8YAAAAAElFTkSuQmCC");background-size:cover}#toolPanel .round-active,#toolPanel .round:active,#toolPanel .round:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASrSURBVHgB7VrrUdtAEN6TB5Pn4BKUDuwKAhUEKsD8jJMMUAFQgfEQw8+YCoAKgAqgA5QKYn4SYl1272Kw7qGHJVlHRt+Mx/b5LN2n3dvbF0CNGjVqvCAwWASGvA0TaOPdfGjACr63xDiHMY7f46db8CCAL+wWSkY5hPu8BUvQRRKfIBREW6n/y+AKH8Qp/Mb3XRZAwSiW8BFfRQnu4YJXoQgwOEcNGMA3dgUFoRjCRRNVQVJ/gK0iJJ6PMKnusiC6k2J2gPMCvGMwM9bCsRaOtcXnJDA4hB7bhRyYn3Cf+9CES/zkW2aM8UUqeQ3v8X2LjWOvd4LXC1FDSEsYbMbMDHB/r80r7fkIkwozOLMYozEufADvUBpJJG2YkmdCe3zLPTbm2dvZCR/zTVzEyPhbCAe5iJpwxPfR2u8Zf2N4EvTYKWRANsIkWU+osXoV2p8bpZ2jJHGO9zVJO0T1ziBpL+1EsWdJjVXQmfkaOqU6DZ9xvz7gPeiYUuHhmmhtKZFewkN+B6qBIrJfWRcWie98ZDBqZMg6aMgSt1I6CR/zPujW+HzhZAl0T3rQUfjieEyBZMJ9sX+i5yzt2TfoCFSFR1xP9DwHsUayMQlIJrwMP7QxhoaiSEucFaS6ZCRVNJKlHE+YnpjuLh4II1I1yEjSMTgLWmuClOMJe7Ad+c5ECLcPruAPnvnSo3tGgpTthKWpX4+MceWJVg1SbfLqZkFSJh/fAjvhpiHy8TBqcQ0mKVMsboGdsH7WjZzYuyqkAbuIjFHiwQI7Yd1YXYOrCBXN4yLcNMJMmHJQ+swrcBUTzeVsGTmAjXCoeVVjJ9V5CulSBpGxCWQgDMpkBqVnE3ND9byYOTFhIxw161ykUt1GCD8j3z1zyshMWM9k/IKXhxXTYPp4+D+BmTCH6gKDecE0iRq3oU3CY+ViPrgOdRuGZqHZJBwo331wHbqzYTxZzIQb2mQ/ziGvHDLQia7PU4T2NGyCTMipYdc6uApToGNJKsYFD9E/NOAjuIvo2pjdDbYTDpUIhGJjF9VaqnM3MqYn+Z5gJ/yoVRdaqDo74Boyxu12wuSQ66qx7aCU1ZTORVygE+9pTbSUjltSHnIi60fGQpEBsSK58nDMLw3JgM4i+jFiIcu1d5Ex0sgeW4v7W7IvPTEm7s4qVW26d9NY1EssDiQTpsqcmhkkNWpCH6pCUxQHfGV0kCZJka6YJlsbbgwu5ghVe7EllyEnst3IGAX/PfYhzd/TVw9lVf4GVBeOSpiy4aTcCEuqMWlVV/lljHraSZuCKqYgnrPvIhF9TMg1RW3a134rrSBOkBc2qbC0mCc8VckyNUiqdM2m0CzfMGMra5/H/E0tnnjiJksdABXc8nTSEdFX6ORMRFnU1jizoKaWKeL6Lp4xAkrgpyFPJCkiW8JAYILvtnZFJnq91uZNG+fvxDvih1qV0QQujIsMO9lM6EkPTD40H5IxwEL8fp7adDGthyTtCZ6NrKTWQy4aTg+K6LkshvAUcm+TtItJFhRIdIpiCU/x3Ea4mVHqVAkktb+At7j/S2irKIewCipsyXpV+19FYJpSvRfZRUoaUh6t6oCkRo0aNVzDX2qpg7pu/G77AAAAAElFTkSuQmCC")}#toolPanel .right-top{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGcSURBVHgB7dk/TsMwFMfx33M6RCoLG4Kl3KRH4Ah0ZOMKnABu0HIDbkC5AUfIAnTMQFGl/jF5MkMRKpIT59mu3met6qev0liNAyillFJKKRUEQVp5NkIIq0WFFuSCm9DCmOdm4ghhVES7yeZzMff5koGQoqBpwFg2stZM4UksGJZqJEAs2BDdWWsrRCa+aZWem9aabwXQ+MDH1Xb5fgkPAwhbeeyuZng+ba7IGAHJ3cOefmKvEViSwYdj7SM6Si74UKwBTbZbO0NHSQX/F7tevs0QQDLBErFuvQRIxbo1I5OMdetGJB3r1o4kRqxbP4JYsW6GsJixbo6g2LFulpAUYt08iSGJxLqZfQ8IGVuWr82z8f7JyRyeej0A6OXKNgcIg4JuQVRvBl8PqGuvo6PeglP6Ge/rJTjVWBY8OOVYFjQ49VgWLDiHWBYkOJdY1jk4p1jWKTi3WNY6OMdY1io411jm/V/aDC/uc41l/g8P1l79XSSPWOYdTPT7lWdOsayAJ1ucvBiD0+YFd0Vmd7NZfjxBKaWUUkopdfS+ASmNvgIGrsXnAAAAAElFTkSuQmCC");background-size:cover}#toolPanel .right-top-active,#toolPanel .right-top:active,#toolPanel .right-top:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAF3SURBVHgB7dpBSsNAFMbxb4roRvAK9SY9gkewSymCR9ATVBfq0noSewSPkCP0ANJxvropaISXvLx5A+8HbUpDAn8yCWESIIQQQgghBBUJ1l7zHBpuUocB7ILXJfQUH+XXHDo67LHEbdpKNprByhneoBeLw75mh32K2AVn7OCAXTDwUE6gDpX5v2jlMmwzFj1rO6zSJQROYE1ydX3OPEcXUGQ5pGV+Yq+hzGdwX2zGO0byF9x/ZJcleIORfAX/F7tKGyjwE2wQSz6CjWKpfrBhLNUNNo6lesEVYqlOcKVYsg+uGEu2wZVjyS7YQSzZBDuJpemDNWO/8Fm+j2dOthCadgJgiiPLCYQ97spnh3M8YplEU0fTBTsaxsemCXYaS/rBjmNJN9h5LOkFNxBLOsGNxNL44IZiaVxwY7E0PLjBWBoW3Ggsye+lX/IajcaSPDjj6o9/m4glefDvR57NxJL86WEqgXvcl+VFWT5JXzkIIYQQQgghtOkb2FSXUxZQW5sAAAAASUVORK5CYII=")}#toolPanel .brush{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALESURBVHgB7ZlLbtswEECHpOykcQoIBQok6UY9QZsT1D5BkhMkOUpPEPQEcU+QLLtzdt26J6g2RQt0US0qRLBCMTMGHMiybJPyjwT4VtJoCPOZ1FCiADwej8fj8Xg8m4GB5YjOuytQxZkC+MgYxNjh4ZNUXyD7E0MD7BUOw1Dkr+6wi92aqzGH/CJP/w7BEDuFUTbIDwY0qguyEpTumUrbJ6wnO8FYmoNNzJHF8wSguMaD+2qLAlqDVuetzp8zxp4RXiBbAOtB+ms8iqJz3MduX1ZaJ1IWpzqFTIANaMqOY/n/e94+fI/S5dx9xoHhtW/Lfmr3U9pAdoJMf19hxtdyjAE7Aw12K7ygQDGurutkJ0ip+pVQBBrsTnhZNS7YDewfRXPbCn5TDilQWpV6N8J6S08kBB/MSM9pi1PaUuEF96xSKq5kT0vPbatirNKfQYPtLkvLCpSUCedswBiLKi1jOcovgnbrtk62kKqn+2y9PWHdaoyjOUd6BlNZYjvCpkuPhnQTWWLz93CDdZYkivbeKebUFqKmssRmhZvIvpDUdm4VWWJzU3oV2QXVeBVZYjPClsoS6xe2WJZYr7DlssT6hB2QJdYj7IgssbqwQ7LEasKOyRLNhR2UJZoJOypLmAs7LEsY71oG4s13V2UJo5cH8fr43GVZwkhYSea0LGEkzJj6NB3BvWGHZAnD92Fe2SlUTskS+sJhFGJ3w3JIjmS9sKWyhL5wls3uIec1nyktliUC3UTOeXc6oh5eDlES0lbEg6DLc3ZpqyyhLYxPKB/K5wpYKDont7h53mU5i6A9iU9jkyyh/aQlDk5+YnYEBtgmS+gJY8ES+egfGGCjLKE3pbMsBLG8vtG3Idw8f1CF+lHsPfYhTRKwDJMpfYfZ55PzshwXavgUZENI7BOsYvS2FBwedZkSSd5KYxfkPB6Px+Px2MUzbTi7WUXRE4wAAAAASUVORK5CYII=");background-size:cover}#toolPanel .brush-active,#toolPanel .brush:active,#toolPanel .brush:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJySURBVHgB7ZnRbdswEIZ/qUFbBH3ICN6g7gR1J0g6QZPHon1oR+gEQZEGeUwyQbpBMoKzgTaIXxMgZu58cGDLknwnWfYR4AfQtiiS9meSR9oEEolEIpFIJBL9kME75+GYPuUhAob0XFDOGI/4i99ZgRb4FT4NB3iHGxIdVdwtKH3Fj2wMIz6FWfYtbunVsKHUhNIXq7Q/YZ3sHLN0Dk/Uy07wjBPqnv+l/ANKtzTPNV/ODD893CS72Iv/whV96m8rZZ7wSRPIfPSwVpb5mR1TILsuleP6v6Bg98IW2TnV0odQsFvhpgA1pTnbFIwCrko5AyjYnfC6aJzjlMoMauvy/WVUkXo3wrqlZzArU5aur+tUuGnOytZxkWXpurpcL8cfKNjusrQuQOX0HOh+WJmPBXgrCVyiSjajut91e+vtCWuj8QX1ZrX0KkZZqbINrEuPRrqFLNP/HG6zzrLEI+2c6gJRS1mmX+E2suvoICvV+6KLbFM07iArTfSBU1lpZtM4lpWmNolzWWluU0QgK01ugkhkpdmuRCQrTXchMllpvi0RyspbtCFSWXkbKxHLMva9dMSyjE34LBwhYlnG2sNRyzI24Tf4XMq5jkmWsQkHwz+FDmUZvTALyOHVIuPasg5lGb3wXsV/yFXD2bEss2coO1q6ynD3+lokB7PTejnZcynL6IVzfFy6DjS8L8IlnQGNMD/XqdrGOJJlLD08XLmerjmldybL6LaWMmQfYMGhLKPr4fc0fKeqkgWlOxru99in48yTbAJn6H88nIcbejxayCkwlwu0PH2g5FCwjO3X0lkYzQ689kk2ArlEIpFIJBK+eAGdRGPGDQz7SwAAAABJRU5ErkJggg==")}#toolPanel .mosaicPen{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAOtJREFUaAXtmckNwjAQRcNSBg3QCkVRIXQBZxogghlxQ7Zl8YKSSG8kX2bx8r4PtmYYNAlIQAJLJXCOjT1jvGYet1j/FKNom6L348zN7xrx3tC1N7GSdwz/I8ahEq+6pyJfXaAzcIm83EvRtkXvipweYG6xVEAFIAGvEASIy1UAI4QTqAAEiMtVACOEE6xegdb58w2eb3Fqf/1XrF4BD0DvF61XAUqQ1qsAJUjrVYASpPUqQAnSehWgBGm9ClCCtH7fmOAesWwuTPEnaCzTFRq7sr6Ssq2T7Z2pPiS/zpOdomx3aRKQgAQWSOANmudym8Lt+O8AAAAASUVORK5CYII=");background-size:cover}#toolPanel .mosaicPen:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAXxJREFUaAXtWU1Kw0AUfm90UeyuIih4Add6ATeinkP0TIrnqOLGC+gtFASxu0o2zpgpSUngvaTtS6YtfFkl37zf78tiZh4RHjAABsDAOhlgLfnBS3btvX8MIRxpNilwJv50O+72+2IwlvLtSmDEiuIPtfVlcGZ6X8a+ZhvoxP/5hxw7ruHFh9pAhfkxDfhucr73IQVowkZP0xDXfy6HZ012TWv7z9O3EOhUs3Hawhxfsfi5f88vrQ2swnzPNdfCtzZQs97ADzSwblGgABQwMoBfyEig2R0KmCk0BoACRgLN7uqBptwKmzN0FGByNRRr3fpfSD3QROLiScpyGClV1NhbRJwyhma79QqgAU3aVDgUSMW0lgcKaMykwqFAKqa1PFBAYyYVDgX6ZHr0+iteqVdzbqwCs+KzcF8tVnpXt9NxMkL5cCHez0uOi2D5vf7sadsSi7GywpkoMPOXaJODagNxrBMnI03DBS1ol3gs3jl302VMxAIDYAAMdMfAP+EdVKaWg/p6AAAAAElFTkSuQmCC")}#toolPanel .mosaicPen-active,#toolPanel .mosaicPen:active{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAV9JREFUaAXtmU1KBDEQhauiC9GdIih4Add6BhnmHOKhxHOoeAY9hjAgLkfcTGo6Mo2ZpivW2F3GgZdNJ5VKVfK9XuSHCAUEQAAEahJgLfnx0+c0xngnIqeaz1/Ymfg17ISbt6u9+758u33GZFtN/kTr38TOTC+b+K/5Cp3HRbxtbGdr9lVDXcA3ef4gkv2+wVbb++Tg0urb9Tt6nD+L0EXX3rZDW9G/wyavxx2nx7CAcRJ5RcECvMha40IBKykvPyjgRdYaFwpYSXn5QQEvsta4UMBKystP3U6PmfDwYS6/jddspYtl63+hogLpJDXkMDKEfBF71rn1CmABmZpVqlCgCvYsKRTIYFSpQoEq2LOkUCCDUaUKBapgz5L+cwXS1X65qNvp9DJCzeNCup8vh9B7fzqM6CPbnq+rfWHmWWvpftUFpGed9DJSelzoBvNop8mHEK49YiMmCIAACAwnsARsm0C5E2sdIAAAAABJRU5ErkJggg==")}#toolPanel .separateLine{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAA2CAYAAADgQzjYAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAApSURBVHgB7cixEQAABARBr3H6NEJ9IFWA6C+6WcgUWQ6F7aucCATCLzSr6QQMe0nWygAAAABJRU5ErkJggg==");background-size:cover;width:1px}#toolPanel .text{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANiSURBVHgB7ZnfUdtAEMZ37zAQlMyIh8zw5yGmA5egVBA6wB0QKiDpADqADuwK4hLoAL8k8BY9xEyIo7usTAzW6Yyc094lk7nfDMx4Ldn+dKvdT3sAkUgkEolE/hYIgRFbe6eIOqOvHheduxPI8xz+V2Sy35fJnp7/iWT3DAITdIXl1t41fWN3IZTTKh+EXGUBoUj2e4bYklTcv+hDQIIJlqCPbXEU8A4CEm6FNWT2NzBbe7mTQSDCCN4kQfV0fkRpPIRABBEspTh67n0EPII0TSEA/gWn3VJIv+koOU2CrLJ3wXI6rQnRSp/Uj1TPZgEXAVK6LkRpPSDZo2oUM+i87oFn/Are3OnOhFQgod9vx2QvP5qHi07He1p7FSzQVn31Zfn/57fbEV2MisNChGPwjFfBiGgKyIvJ7cX8hdb63Hg/9d2T/Qm2W8nB4guFODBP0xpPwSPeBNusJKK6rAQmn6+sxctjT/a3woaV1KDHD/etcZiCoRkTP7begye8CJavdg8t6Ty0Has2Ni5CFi8/K6yw9gSkCm1/2M/HuQa4NKLeihe/4FnvrVpJSuersvcuO0VgEax4sQuWUmZmDKHWfio83NthipeHlK5byaKAUdNZoYoXr2CbldR6+Fw6z7EVL4H80xBWwVYriXqw0smW4kWve9zFi1Vwk5Vs/DGW4sU9DeETbB/jrLa6vymLF63q1WKMexqyBkzYxjg09O7JZPcT/BHYnSXzE7NRroKcZWjPNoi3DNkZ0aNicvMWGGBJ6SVWkhG+US7PPWyxktxwFa/2KU29l+7f68UQ3YE59d9W+0VU8btGiGUfqnXRerCSlSJDV1GdFHertyMbtK36gZ6aFv00S/FiSGk3K9n4qevrNWEc+1DtBLewko2Q8/Ixym0lWAjRrwVXtZIr4GOU26pomb23HOOoyc0BMCKT/a/0yYtOi+zql21wxH2FLVaSbOAImOEe5ToLtlpJcyrJAPco1zmlQ6Tz43fN/Hi1OFJP3nbpyU4rbLWSGtlX9/GjGachbildYH1HUKkL8MSSUa7T9qqT4HISYURGLL13GUtGueCAk2Dqj+NqRHtL5zmqKM6oYo+ffgOcgwNuRSvtpnJ6X1q/N3TFhtPJDcvDeSOzBxXISKx12yYSiUQikci/zS+amzngvBJLrAAAAABJRU5ErkJggg==");background-size:cover}#toolPanel .text-active,#toolPanel .text:active,#toolPanel .text:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALxSURBVHgB7ZnfcRoxEMa/498zqSDnDijhOkg6CK+Jk0mowE4FNsMQv5IOSAVxCXQQOgh5tRMUifPZ3GnhjLS7ftFvxnhOcMCHVrufVkAikUgkEomXIoM2N+YCBoX9W+MOE0yyDRTpQZO5GWOLy8frAf7Yxy9QpANdLhrX73BlhlBET/DcjOxj3hgdoo8xFNGc4c+gv8EbKKIpuCBHXQKbmQJK6AguBeU4/C3eQgkdwR2bnI6jlrzkBZdCxi2vGqKrM8vyggeEEGMNR5NeaxSwIC84I4R0sbTjt7Uxl7zK0iWKrOArk++E7OOEvs/W+IevxB3iYS0ruE+G8/fd/0/ZrX1s+mi6VjMiKzjzBGxwni0er7aYNp4fStdkOcG0lVyi/ulL776u57dZkZxhPzy3D+FccZ6tyOQlWJMlBRe1q8zuf8t1W2eLH97YQG7LKCN4ZlyyymtjhhDmuMcCislLRjC1A+rgmnyt63g0Q10wefELdrXXt5KrXe09jFry4hc8ILeB06P3uLWtlLz4BVNWstMQQ6GUvHgFU1YSVsjxcC6hkxd7N4RXcJ/0wks8Bzp5jbiTF6/gNivZjv/jMHdD+ATTbZznzW5FaUxWjVHWbghfI55u44zwzfzEKWztj1Y/D6lauddggPPkoSDGRjaJnQZ1+FMaGRbBPCFNWUlOGFu5PII1mulMySv+9NDV3gF+NUY38GvqqeTee97hLPa0MX4N01ZycmI58pmZSzur+36aJXnFh3SolWzjLyGMYenECY6xkm240BVo5cYJ7pEnCqeZjWMItHLjktbcuGSV773bGh+yM3AyN7/h1u8Tzq6+QiDhM0xZScOwdpswt3LDBVNW0t/txMPcyo1Zw0Xt6lBXMhbmVm6YYLoryT+7FYzdkDDBHbL2LiAF3Q0JOl4NDel6LaxOBKU41MoNIEywW6/7SIZzRc86r/rnThFAWB12CaO/s36v4ZzVx4xlr9rKjXV29zZhSSXIRCKRSCQSovwHybzXUxgaB2wAAAAASUVORK5CYII=")}#toolPanel .save{background-size:cover}#toolPanel .save,#toolPanel .save:active,#toolPanel .save:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAK8SURBVHgB7ZpRTtswGMf/tgsrpUzRnlqeshtwhPYG2xF2grGnPVJuUE6wM+wEYyeAPe6J8LCBtIdFKmhdS+PZliaaVK0TJ3ZK8E8CtV+b2L/Yce3PATwej+cJweCaIAgoffWR7XbfJKz7HQ93MRzSgmPYrHMBgpCLf4zhaAEM4RACl7R7IWP0ajm0WPAQ05trOILimeGFm44XbjpeuOl44abjhZuOF246Xjg3YiGv/lxTslwjYbrXf8/m+1ds3vlNO4cncESq3L3+MQwoLhyEAaFkDHB1lQnByIW0LCNVLiUnJi1t2KVJKg9lW1rJijIyYaNuXVw4jmKO5DQbtiW9RlaWd4o4LpwANGrh5P5mrApcrUSl0ptkH+5+jmCA8SgtC7QpbUNWnRclsCVtS1adGyWpWtqmrDo/KqAqaduyqgxURFlpF7KSSveWktnknL04kLsZg+W4qPSA7ByAc/6NUpKaIXGOMd19eexCVlL5ZtpGaUoC8cFRKi5jBCvTRBuyEr2wwW7fWumM7NpYEdmC9dPuHpru9skKt7qHsssWGqmLtmzR+m3ePaxgt09Ij/JKF+7GBvWzngBYN3pnsXXPZnGS8dBJu5KVOEvxbPiddiYrcZrTWpbmYqFJwT+4lJU4f8ZDCQbBWL5ODNazZXEurKhB9D8+TZtiehtlQ60Wf43tIVyJaOYIOVqYn6feceIsLauDUfpp+T0Hv9Qdo72HheBXOfF/jJAB2+9/ETMaOdpGqAcxw1IXPlwOEvAz3YH6B9NEHprO/l4QQkJsMaJ1I5Fc1N5u+i4t0rKM0LfZXPQ2IX/TE8g66sk1Ss/vf1yKLw7FAj7ClqFaFmQIUcc838+dAEjmk1vOup9bFNeigJ64F3qoEXnxRfbkbLHz5x0mv6K8x5V6uLQtlmeogWl7Gtc5efF4PB6PpyL+AYIPPUb9sB23AAAAAElFTkSuQmCC")}#toolPanel .close{background-size:cover}#toolPanel .close,#toolPanel .close:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAG2SURBVHgB7dpBboMwEIVhiLquyqLXibhZ6c1QLtIDdEFPAOUtkKIEkMee95zF/FKUKk0FX4xU7LhpoiiKoiiKoqhOP33/gUdTudzzuFjePF2vX+/LMuGBn5tKlZxHm/rGaf005/UA969dlmXobrfvRhiAc9sO969d2rbrxvEv5e9NI/wYDqwc6T2stWQwPsH1YE+jqUIfYXFOqaOLki/prd++H9ZL+QnIvLzPsJ/jODSGzGCkRHtiURYYKdDeWJQNRkw0A4uKwIiBZmFRMRh5oplY5AJGHmg2FrmBUQlagUWuYJSDVmGROxhZ0EosooBRClqNRTQwOkPjWY1FVDA6Qu/FxiI6GKWgFVgkAaMztAqLihYALL3N85LzO+8kI5yyUqFaLqKDLcsyCjQVfPZ/Fs/qlRNEA6fcVNRYLqKALXdQarQ7OOd2UYl2BZfcG6vQbmCPiYAC7QL2nPWw0cVgxhSPiS4CM+ezLHQ2WDF5Z6CzwMqVCm+0GVxjWcYTbQLXwG55oYt2ACDl5P0QLdwBIMMiHGvvS3lL2TsA1NitR7R1B4A5XNrTC2xbepXziKIoiqIoOuwfOs4hnf5I1CMAAAAASUVORK5CYII=")}#toolPanel .undo,#toolPanel .undo-disabled{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMVSURBVHgB7ZrPbtNAEMa/3bVj3CQUNWmjtqoa7vTEiT4AvbSvyUNwoZyQEOXSikNEJTi0ARqQkBunTuwd1hEtdkOzzl850f5u9nq8/ry7s+MZAwaDwWAwGAxzgmFSVqqbgL2FiHsILhrIORYmoFCqPQsl3+8fCAlZrDlofz9FjuEYE8vdfnEn9hbCLnLOGCO8XhKudSCZrAy28SZyzoiCH68Jlx8QQ/l+iyR+is7FCXJOZqeVWq/JG0gKIkEf8752b8kkOF6vagrvDRgz6kYRjlEKf2JetDYC4FMXY6IVbDkbL6UQdeQIRsxjJJvhTfQBuLoexVYMb96uwGH7yBsMDjFW4Zaok4smut1OVlPNtrTqqWkbIKcQo7KQxSOUy5WsNpoRvoqIFSXjbAe5hQkunR0Kdxrx82qvRhbUG1Rv8pCIOSnjvtNib1Dq/cK8CIKCiFb2CXwzeVoCJ/Cb2m1xhFi6WhauOCTGB/dgwY/hzTeOFiu1o6To/stvr73SeXDNlE7idyl0v3KL1dXd0yNNVLfsMmTvem6RFvXcJrNFYqtkggp+B732j2F2IwiOiUXvNrjt11QHqZEmYIsKxa6uw+nhd7ld3Eo+BzEZqf7Ph1mNKDhGObJeu0HWakFNo1qyJUuH04S4C8b/xQichKDQOxtmM/bXkoqb3/UdRRJpe5gngZOK8OJtSmcyxggnUGuW+COPRDyl+Tk6l+8xVxwrvY7Vc6w+asD3H3RcEyUA+gStBgLkPtNxy/hTekExgpcdI3jZMYKXHSN42TGClx0jeKFYQWngXKs19BN1sQVH6RpXnNfSmSy0YAv20+RxBHmps1lgweslKe7Vo0P7i85qYQXHNeqBk0GgzZpOnvEYRrWqzTGNjI+SgHiusqSp8oqUpLIuLW1ObUaC478E+BH5fPqC0U8Jp4iribjpZSrGz0awW9hTKduZiL1PvyB/c/0a8DJlTGc7pWdMPLJ/xWYuyE+Wpn2I0Pn9v5LMtJAkPVUfPqNO8S3wbaRc+OQ/pg1jFk6r9UQFF59zW7M2GAwGg8FguOMPg6ATjq272toAAAAASUVORK5CYII=");background-size:cover}#toolPanel .undo:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKwSURBVHgB7ZphbtowFMef7aajjTTxZVJLv2QnGL0BnID1BvQEYydoe4K2N2hPwG4AO8G2Eyz70FFpXyINOiaw356RJlHDcBJIlkT+SfkQO8/4j59fbL8AOBwOh8PhcOSEgG2pHbX4/ssuXQHOfn6GKsMPjt8Jv4F/L7rvQcHhkBLun1wzzm6WyxiHDhScPUhK7SjYE7yPgE2zijH2EQoOS/S0f9IUiH2yClYaYng7H4+q49KL+Qr4yRSLABEHfF8GsZpYI7yYr4DrBEXA8VzOML/oXJtGEEURpMQqWBw2tAu/hWIR0jWUUl3B9DFMYrhZsJ6z2o2LS8hhdjab/IjtYZvnsOeF9J+kdp8cCBR4A89/1YxrsFlwFEYI5DbFpk6i+1Cv1+M8HCtoeeTaCmBAMdlsdBG0vByDlhSCBKpr6npruRwRrtTT90ubffz3MC04OGcDWlwEq5WqKyeP95Ajwj8eGKIj6T29tkXw+EtLioZKYRsRwzXN3PHDxgXkiJR4bhTV+e+Drs0u2Vpai95/cUoONDSrGIPLXDcPi9fR835QH1o2s+SbBwpkcjJqk2vfmlVxfnC38HujA2+sFpCS+fihRwKfRXDaLYWQIxLADJaBzSbZ5mENwj/qAvIOif0yH9uj5E6hQCoE/7pcRHM7gOno279Mthb8X0khOLVLlxUnuOo4wVXHCa46TnDVcYKrjhNcMoKVkg0bB02pBQshAqPIeqRc7hFG7Bj31uxleQXTXnglBcTwg82stIJ1jtoskxKGVjvIEj0Ku4dOOdgFpWnN9MpdnMRaNoL10Qvng3WJ8yxAwFBJjJUSysSluRC9/MRCpICfxU2bljpKL0YWWBsmDztKl6ZESXmzPiWzG3Tb+kxceb9Ok4jVZHpMW8sgaE23/OTB4XA4HA6HIzf+AELL5fDBKGTPAAAAAElFTkSuQmCC")}#toolPanel .confirm{background-size:cover}#toolPanel .confirm,#toolPanel .confirm:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALrSURBVHgB7ZlNctpAEIV7RPhx8IIjeGviVMEJHG5grxKchcUJQk4QcgI7JzAsAtk5N8CcAKfKga2PwAJVDJQ06Ra2y4hBaIRURlR/O3pGo3makfSeAGAYhmEYhmEYhmEYELBD5O9+mpAyjsF2etbR56aqz84IfjvsfBMSGs8Fx6mpRBuwAyyJJWilFbyBhJMfts/BK5awoafqn+gtjfdsCQyj763jan8fv6s2VMckdkvPxYquty5A/lgldt6eQHL9zoGRhS5O/sDT1LKKVdPv2MQJXi1W3FrFT+V1xydqS/us7H168q8SZIzErHChf1WYZnN9lVhbQOXhsHofZJzErPAsu9fdVCyRCMH5YecKQJY8ZW2xxNYLzg9+XaCxMBercoTW8VRXLLHVgskyorj6UoMjK+iTbyEEWytY6Y8JB2phxRJbKXiVWLKM1lG1CRuw8rVEr4FZOnNiz4ybh7L+vRKWeRgQTW/dzx/roBRML/hUVqIpFwW3kw2V8fvqDcRMmDCgi3JLp9L0oJiLJWRKXLuTiZGwYUAXpWAp8LG/WCnglb+mlYcYoHEljv/yIj/SGhfP6hAhSsGZ6fQSRXqfhLjNoRu1aP8w4J98wqAUPCrXRunJpBK36CjCgC6+4SE3xAlJ9dWnCdGFgZBEFQZ08X0P00kdPLnESSy2yBKZeZo0hCSqMKDLWuPhKzqTu4AQRBkGdAnktGgSAs26a9pfIsB0zb0GUYcBXQJbS/Kvwhanyy2yPjf564kjDOii5aVdt4Xm3Vsn37tOdFxhQBft8OCad0d+9dZJzN6grTQJcYYBXUJ/09r/22lIAcurKgzTOvzYevoZdxjQZaOPeKtESxC/Qdp/hIH/70j4sHTSVxLrnhs2ZP+ufSkN8SVofzcMROyPdYjkM21+0G7iUOcBurbi8Mc6RPLFwyqembRN/fq4D6hXFuvOAyKEvLeQ8kSAcYxbt4D38kiC08tOJs1NfDfDMAzDMAyTBP4D55plBOlQMmwAAAAASUVORK5CYII=")}.__screenshot-lock-scroll{height:100%!important;margin:0;overflow:hidden!important}.ico-panel{border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid #fff;height:0;left:23px;position:absolute;top:0;transform:rotate(180deg);width:0;z-index:9999}.ico-panel img{height:100%;width:100%}#optionPanel{background:#fff;border-radius:5px;box-sizing:content-box;height:20px;left:0;padding:10px;position:absolute;top:6px;z-index:9999}#optionPanel .brush-select-panel{float:left;height:20px}#optionPanel .brush-select-panel .item-panel{float:left;height:20px;margin-right:18px;width:20px}#optionPanel .brush-select-panel .item-panel:first-child{margin-left:2px}#optionPanel .brush-select-panel .item-panel:last-child{margin-right:0}#optionPanel .brush-select-panel .brush-small{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKlJREFUeNrs18EKgkAUhWEnwmW1amObHqKeo0ftOfIh3OSmlba0xXSEK4SICAoz4X/gINwL8sE4C533Pok5myTyAAQIECBAgAAB/jdwO/cFO3dsH3v1qmY2LtWHWr/9KyxQOag3Nf2ZnQ17V6vQR3zp4bqktgv+DWYjuxO3eELKkd0zBmCuNgPzxnbBgZXd1kL9WIslbnAbx38xQIAAAQIECBDgqoFfAQYAhLQbgzDvXkAAAAAASUVORK5CYII=");background-size:cover}#optionPanel .brush-select-panel .brush-small-active,#optionPanel .brush-select-panel .brush-small:active,#optionPanel .brush-select-panel .brush-small:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALhJREFUeNpi/P//P8NgBkwMgxyMOnDUgaMOHHXgqANHHTjqwFEHDm0HslBqAB+jGIhSBeIOIHaBCu8B4gogvv3p/yuKzGektMEKdKA6kDoBxAJoUh+A2ALowJsDHcVtWBzHABVro9RwaoTgRxCFQ/oLMAR5R3MxAbAHj9yuweDAamiGYMCSSaoHgwNvgHIrEK8D4s9QvA4qdmPAM8loVTfqwFEHjjpw1IGjDhx14KgDRx04pB0IEGAAHeMoHW2kl/cAAAAASUVORK5CYII=")}#optionPanel .brush-select-panel .brush-medium{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAS9JREFUeNrs2EsLgkAQB/BWupQQHXpczbp36/EB6ptH1M2D17RLhx6XQG9lszCBxEa5zoTQDPxvjv52RR1UWZbVqlxOreIlQAEKUID/Dqx/e2BL9d4t0MP0IS7kBkkgZ0iMub82XrMjLdBQGjXTdgO6jRlpC2QDiX51ixVkClkacMbNhyywR/0COIGMLfrG2MsK9C1xeaTPBdTHzgkezHmR6zoFd88lAOpzDDmAHuHrzeMA9giBXQ5ggxDY5ADeq/4tTgmvm3IAL4TAEwcwJgTGHMAdTillK8FzsTwkawLgGkcylm+xXnlQAhcU2T3baWYLCS36QuzlmahzpX/mrCAHnPE+zYRXhO1strzMRK0n5D0OEQNIJzdMPEf+CGHWL3klf7cEKEABClCApeohwADD8zb9WRTsHgAAAABJRU5ErkJggg==");background-size:cover}#optionPanel .brush-select-panel .brush-medium-active,#optionPanel .brush-select-panel .brush-medium:active,#optionPanel .brush-select-panel .brush-medium:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAU9JREFUeNpi/P//P8NgBkwMgxyMOnDUgaMOHHXgSHcgC7EK+RjFsAmzAXEAFFsCsRQQ/wLiJ0B8HojXA/FGqBgK+PT/FVH2MhJb1WFxYCAQdwGxCgGtd4C4HIjXkeNAcqKYGYg7oRaqEKEepGYtVA8zzaIYCbQBcRkZ+mB6ymmZSULIdByyI0NI0UBKGgRliLtALENhxnwKxErANPiL2iEYSgXHgYA0EIfRIooDqFi8BdDCgaZUdKAJLRwoQUUHStLCgb8YBgCQ4sDnVLT3OS0ceImKDjxDCwduoKIDN9DCgauhrRRKwVOoWTTJJEVUcGAhEP+kVV0M8nk3BY7rJiX0yG1uVQLxFDL0TYXqpXmT/y8Q50JbJXeIUH8HWo/nQPWSBChpUcOa/KHQ1rUxtCEAywhnoU3+1XRp8o/26kYdOOrAUQeOOnDUgVgBQIABAPYuSgtJpajwAAAAAElFTkSuQmCC")}#optionPanel .brush-select-panel .brush-big{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAaNJREFUeNrcmMFKw0AQhpOqRdGUCloD2lMv1T6B6RMI4sOK4BM0b1Clh56skFahpVaUaln/wBQkzKYmTbJTB75TSPJlN7uzM7ZSypIc9sYIVuxa0nsdUAcuqIIDUKZrczADExCAJ/CW5OFTNUolaIMGaIGThB80BF3QByoPwVPQptFaJ8JR7YDnrAS3gAfOM/69HoEPFusI7oIrcJzTGngB9+AzjWAod5PBlP5lym+jkqsEt8E1qBW0m4Q2d+A7KljS3OAVKGfRuzzuQkmzWpsG9uQmvTtW0KatxFS0yUEr2ChgUcRFlRy0ghcC0m9LJ+hQXjUdYQqtcIJ1QYeYM07QFSTocoKHggSrnOC+IEGHEywLEtyJyySi4rfgXJDXFyf4LkhwxgmOBQmOOcFAkGDACQ4ECQ44wamQURySC7vNPAgQ7MYdt/pUxJiKCTloBRUV1abCj3YduEwSVvw9A3I9bqHqUl2HSsGiYqSbuY0t3JexR62Po5zkXqn18ZG2N7PsMlxaQptH0TrBs7Jpv/mrMte/bGByx/LiWsBSQ7zgjwADAPqYqQ1c9nN+AAAAAElFTkSuQmCC");background-size:cover}#optionPanel .brush-select-panel .brush-big-active,#optionPanel .brush-select-panel .brush-big:active,#optionPanel .brush-select-panel .brush-big:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhRJREFUeNrUmLtPAkEQh+/UghCxw06JNuCjJURBK+OjsNVEW4KF6P+iYKGF9rYWhmClKKGg8wGNRu2kA4M25PyNGRKFPb0Fjlsm+SKG3MyXLLezs7phGJrK0acpHgP1D0P6sOyzY2AJRMAE8AEPf1cBz+ABZEAKPMkkLxtv33/1+hJbFOwHayAOZuh5i/WoSBYkwSmo2SG4ABIg0OaqFcAOuLAiaOU36AKHIN0BOY1zpDmnq92XxAsuQcyG33+Mc3tbFaQHr0DQxpc0yDW8soJucAb8XdhJ/FzLLSO4B0Jd3O5CXNOSIL2tUQf25CjX/lOQ/t93sHEkeK81FVznruBUBLgRmApuK9B+42aC1FtnFRCkFjouElyW6K12hs6HkCbBsEKnrLBIcEohwUmR4IhCgj6RoEchwcGeOfL/FKwo5PUuEnxVSPBFJHivkOCdSDCjkOC1SDDF05fTYbBLk+AjuFFAMMsuwm3mQAHB5K/G3DAX02HxtkPjZasz8zQN9mZzcY2Haqdit/HWQdRJaOI/cUDumAd6S1MdnWpzXZTLma2cmWAVrIJiF+SKXKsqe7NQAvMgb6NcnmuUWrn6oKBXaQ4c2SBHOSNcQ2tVkOIDbIHFDi15kXNRzk+Z49Z/keaxYIN3e9m2SM9sco605QlK8oZVaxhTV3iZaGMfpTT8XZmPTAU+hJxr7V4B98KJWsn4EmAAKPJ2SXt/mW0AAAAASUVORK5CYII=")}#optionPanel .right-panel{align-items:center;display:flex;float:left;margin-left:39px}#optionPanel .right-panel .color-panel{background:#fff;border:1px solid #e5e6e5;border-radius:5px;display:flex;flex-wrap:wrap;justify-content:center;position:absolute;right:28px;top:-225px;width:72px}#optionPanel .right-panel .color-panel .color-item{height:20px;margin-bottom:5px;width:62px}#optionPanel .right-panel .color-panel .color-item:first-child{background:#f53440;margin-top:5px}#optionPanel .right-panel .color-panel .color-item:nth-child(2){background:#f65e95}#optionPanel .right-panel .color-panel .color-item:nth-child(3){background:#d254cf}#optionPanel .right-panel .color-panel .color-item:nth-child(4){background:#12a9d7}#optionPanel .right-panel .color-panel .color-item:nth-child(5){background:#30a345}#optionPanel .right-panel .color-panel .color-item:nth-child(6){background:#facf50}#optionPanel .right-panel .color-panel .color-item:nth-child(7){background:#f66632}#optionPanel .right-panel .color-panel .color-item:nth-child(8){background:#989998}#optionPanel .right-panel .color-panel .color-item:nth-child(9){background:#000}#optionPanel .right-panel .color-panel .color-item:nth-child(10){background:#feffff;border:1px solid #e5e6e5}#optionPanel .right-panel .color-select-panel{background:#f53340;border:1px solid #e5e6e5;height:20px;width:62px}#optionPanel .right-panel .pull-down-arrow{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAQCAYAAAABOs/SAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANNJREFUeNq01TEKwjAUxvHXOAhKJ3Fwc9PVzbWipxCdHLyMV9AD6A2EegRdvYBOnd3E70ELIcT2JU0C/1BI4AeB8pKUhlMiOqAtKijuGqEj2ne61D/jY1V2QZ+IaI7maKywrdETzdAVDSKi/Lp3tGP4hRYRcRPlly1Uech4FgG3onygtEvvwDijNxtqwiHxCp3YUBscAm9E/8FtcBFaB/vgYrQJdsGdUAkswZ1RKVyH6+hDivJKMCTa/CY9DV26DBlX2MTJB/WFK/yEvmjjM05/AgwANuZSRB8r5twAAAAASUVORK5CYII=");background-size:cover;height:8px;margin-left:10px;width:15px}#cutBoxSizePanel{align-items:center;background:rgba(0,0,0,.4);border-radius:3px;color:#fff;display:flex;font-size:14px;height:25px;justify-content:center;width:85px}#cutBoxSizePanel,#textInputPanel{left:0;position:absolute;top:0;z-index:9999}#textInputPanel{border:none;box-sizing:border-box;font-weight:700;margin:0;min-height:20px;min-width:20px;outline:none;padding:0}.hidden-screen-shot-scroll{height:100vh;overflow:hidden;width:100vw}</style><style type="text/css" id="mytempCss">._8mqQwQ { display: none; } ._1TWLMK.icF5zO { opacity: 0.01; }</style></head>
+
+<body class="bg-surface text-on-surface overflow-x-hidden">
+
+<!-- =
+     PAGE: LANDING
+= -->
+<div id="landing-page" class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-surface-container-lowest">
+  <!-- Decorative background elements -->
+  <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
+  
+  <div class="max-w-5xl mx-auto px-6 relative z-10 text-center space-y-8">
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
+      <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+      Interactive Prototype
+    </div>
+    <h1 class="text-6xl md:text-7xl font-extrabold font-headline tracking-tight text-on-surface leading-tight">
+      NetQoS <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-container">Optimizer</span>
+    </h1>
+    <p class="text-xl text-on-surface-variant font-body max-w-2xl mx-auto leading-relaxed mt-6">
+      Ensuring critical academic traffic like VTOP and Zoom never drops during severe campus Wi-Fi congestion. Powered by a 0/1 Knapsack Dynamic Programming algorithm.
+    </p>
+    
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-10">
+      <button onclick="startApp()" class="bg-gradient-to-br from-primary to-primary-container text-white px-10 py-4 rounded-full font-bold shadow-[0_8px_30px_rgba(0,88,188,0.2)] hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2 text-lg">
+        <span class="material-symbols-outlined text-[24px]">play_circle</span>
+        Launch Simulation Demo
+      </button>
+      <a href="https://github.com/Abhinav-Singh25/netqos-optimizer" target="_blank" class="px-10 py-4 rounded-full font-bold text-on-surface-variant bg-surface hover:bg-surface-container transition-all text-lg border border-outline-variant/20">
+        View Project Code
+      </a>
+    </div>
+
+    <!-- Stats/Context -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16 mt-8 border-t border-outline-variant/20">
+      <div class="text-left bg-surface-container-low p-6 rounded-2xl shadow-sm">
+        <div class="w-12 h-12 bg-error-container rounded-xl flex items-center justify-center mb-4 text-on-error-container">
+          <span class="material-symbols-outlined">wifi_tethering_error</span>
+        </div>
+        <h3 class="font-bold text-on-surface mb-2 font-headline text-lg">The Problem</h3>
+        <p class="text-sm text-on-surface-variant leading-relaxed">Unrestricted massive downloads from local hostels cause heavy congestion, making high-priority academic portals crash and timeout.</p>
+      </div>
+      <div class="text-left bg-surface-container-low p-6 rounded-2xl shadow-sm">
+        <div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-4 text-on-secondary-container">
+          <span class="material-symbols-outlined">functions</span>
+        </div>
+        <h3 class="font-bold text-on-surface mb-2 font-headline text-lg">The Math</h3>
+        <p class="text-sm text-on-surface-variant leading-relaxed">Implements an <strong>O(n·W)</strong> Dynamic Programming Knapsack model to maximize total priority score under strict, hard bandwidth limits.</p>
+      </div>
+      <div class="text-left bg-surface-container-low p-6 rounded-2xl shadow-sm">
+        <div class="w-12 h-12 bg-tertiary-container rounded-xl flex items-center justify-center mb-4 text-on-tertiary-container">
+          <span class="material-symbols-outlined">network_check</span>
+        </div>
+        <h3 class="font-bold text-on-surface mb-2 font-headline text-lg">The Solution</h3>
+        <p class="text-sm text-on-surface-variant leading-relaxed">A smart Quality-of-Service (QoS) router interface that dynamically rejects low-priority noise (YouTube/Downloads) to rescue VTOP packets.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="main-app" class="hidden opacity-0 transition-opacity duration-700 ease-out">
+<!-- = SIDEBAR = -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface/80 backdrop-blur-xl flex flex-col p-4 space-y-1 z-50 border-r border-outline-variant/10">
+  <div class="mb-6 px-4 pt-4">
+    <h1 class="text-xl font-extrabold tracking-tight text-on-surface font-headline">NetQoS <span class="font-normal opacity-60 text-primary">Optimizer</span></h1>
+    <p class="text-[10px] font-bold tracking-widest uppercase text-outline mt-0.5">Knapsack QoS Engine</p>
+  </div>
+  <nav class="flex-1 space-y-1">
+    <button onclick="showPage(&#39;dashboard&#39;)" id="nav-dashboard" class="nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl transition-all hover:text-on-surface hover:bg-surface-variant/40 text-primary font-semibold bg-primary/10">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span class="text-[14px] font-medium">Dashboard</span>
+    </button>
+    <button onclick="showPage(&#39;simulation&#39;)" id="nav-simulation" class="nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl transition-all hover:text-on-surface hover:bg-surface-variant/40 text-outline">
+      <span class="material-symbols-outlined">model_training</span>
+      <span class="text-[14px] font-medium">Simulation</span>
+    </button>
+    <button onclick="showPage(&#39;analytics&#39;)" id="nav-analytics" class="nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl transition-all hover:text-on-surface hover:bg-surface-variant/40 text-outline">
+      <span class="material-symbols-outlined">analytics</span>
+      <span class="text-[14px] font-medium">Analytics</span>
+    </button>
+    <button onclick="showPage(&apos;topology&apos;)" id="nav-topology" class="nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl transition-all hover:text-on-surface hover:bg-surface-variant/40 text-outline">
+      <span class="material-symbols-outlined">hub</span>
+      <span class="text-[14px] font-medium">Library Topology</span>
+    </button>
+    <button onclick="showPage('settings')" id="nav-settings" class="nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl transition-all hover:text-on-surface hover:bg-surface-variant/40 text-outline">
+      <span class="material-symbols-outlined">menu_book</span>
+      <span class="text-[14px] font-medium">Algorithm Docs</span>
+    </button>
+  </nav>
+  <div class="pt-4 border-t border-outline-variant/20 space-y-1">
+    <!-- Dark Mode Toggle -->
+    <button onclick="toggleDarkMode()" id="dark-mode-btn" class="nav-btn w-full text-left flex items-center justify-between px-4 py-3 rounded-xl transition-all hover:text-on-surface hover:bg-surface-variant/40 text-outline">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined" id="dark-icon">dark_mode</span>
+        <span class="text-[14px] font-medium" id="dark-label">Dark Mode</span>
+      </div>
+      <div id="dark-toggle-track" class="w-10 h-5 rounded-full bg-slate-200 relative transition-colors">
+        <div id="dark-toggle-thumb" class="w-4 h-4 rounded-full bg-white absolute top-0.5 left-0.5 transition-transform shadow-sm"></div>
+      </div>
+    </button>
+    <div class="flex items-center gap-3 px-4 py-3">
+      <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">NQ</div>
+      <div>
+        <p class="text-sm font-semibold">Admin</p>
+        <p class="text-xs text-outline">Library Network</p>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- = TOP BAR = -->
+<header class="h-16 w-[calc(100%-16rem)] fixed top-0 right-0 z-40 bg-surface/80 backdrop-blur-xl flex justify-between items-center px-8 ml-64 border-b border-outline-variant/10">
+  <div class="flex items-center flex-1">
+    <div class="relative w-full max-w-md">
+      <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+      <input class="w-full bg-surface-container-highest/80 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none" placeholder="Search parameters..." type="text">
+    </div>
+  </div>
+  <div class="flex items-center gap-3">
+    <!-- API Status Indicator -->
+    <div id="api-status" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-error-container cursor-pointer" onclick="checkApiStatus()" title="Click to recheck">
+      <div id="api-dot" class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+      <span id="api-label" class="text-[10px] font-bold uppercase tracking-wider text-on-error-container">Offline</span>
+    </div>
+    <button class="hover:bg-surface-container rounded-full p-2 transition-all">
+      <span class="material-symbols-outlined text-[20px] text-outline">notifications</span>
+    </button>
+  </div>
+</header>
+
+<!-- =
+     PAGE: DASHBOARD
+= -->
+<main id="page-dashboard" class="page ml-64 pt-16 min-h-screen active">
+  <div class="p-8 space-y-8">
+    <div>
+      <h2 class="text-4xl font-extrabold font-headline text-on-surface tracking-tight">Dashboard</h2>
+      <p class="text-on-surface-variant font-body text-sm mt-1">Real-time QoS overview  --  last simulation results</p>
+    </div>
+
+    <!-- Hero KPIs -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,88,188,0.06)]">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Total Packets</p>
+        <p id="dash-total" class="text-3xl font-extrabold font-headline text-on-surface"> -- </p>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,110,40,0.06)]">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Selected</p>
+        <p id="dash-selected" class="text-3xl font-extrabold font-headline text-secondary"> -- </p>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(186,26,26,0.06)]">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Dropped</p>
+        <p id="dash-dropped" class="text-3xl font-extrabold font-headline text-error"> -- </p>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,88,188,0.06)]">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Max Priority</p>
+        <p id="dash-priority" class="text-3xl font-extrabold font-headline text-primary"> -- </p>
+      </div>
+    </div>
+
+    <!-- Bandwidth bar -->
+    <div class="bg-surface-container-low p-8 rounded-xl">
+      <div class="flex justify-between items-end mb-4">
+        <h3 class="font-bold font-headline text-lg">Bandwidth Utilization</h3>
+        <span id="dash-bw-pct" class="text-primary font-bold font-headline text-2xl"> -- </span>
+      </div>
+      <div class="w-full h-5 bg-surface-container-highest rounded-full overflow-hidden">
+        <div id="dash-bw-bar" class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full shadow-[0_0_12px_rgba(0,88,188,0.35)] fill-animate" style="width:0%"></div>
+      </div>
+      <div class="flex justify-between text-xs text-outline mt-2">
+        <span>0</span>
+        <span id="dash-bw-label">0 / 0 units used</span>
+        <span id="dash-bw-max"> -- </span>
+      </div>
+    </div>
+
+    <!-- Packet type breakdown -->
+    <div class="bg-surface-container-low p-8 rounded-xl">
+      <h3 class="font-bold font-headline text-lg mb-6 flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">pie_chart</span>
+        Traffic Type Breakdown  --  Selected Packets
+      </h3>
+      <div id="dash-breakdown" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="text-center text-outline text-sm">Run a simulation to see results</div>
+      </div>
+    </div>
+
+    <!-- Quick action -->
+    <div class="flex justify-end">
+      <button onclick="showPage(&#39;simulation&#39;)" class="bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
+        <span class="material-symbols-outlined">play_arrow</span>
+        Run New Simulation
+      </button>
+    </div>
+  </div>
+</main>
+
+<!-- =
+     PAGE: SIMULATION
+= -->
+<main id="page-simulation" class="page ml-64 pt-16 min-h-screen">
+  <div class="p-8 space-y-8">
+    <div class="flex justify-between items-end">
+      <div>
+        <h2 class="text-4xl font-extrabold font-headline text-on-surface tracking-tight">Simulation Panel</h2>
+        <p class="text-on-surface-variant font-body text-sm mt-1">Configure parameters and run the 0/1 Knapsack QoS optimizer</p>
+      </div>
+      <button id="run-btn" onclick="runSimulation()" class="bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2"><span class="material-symbols-outlined">play_arrow</span> Run Simulation</button>
+    </div>
+
+    <!-- = MODE TOGGLE BANNER = -->
+    <div class="rounded-xl p-5 flex items-center justify-between border-2 transition-colors border-error bg-error-container" id="mode-banner">
+      <div class="flex items-center gap-4">
+        <div id="mode-icon" style="font-size:2rem;">🔴</div>
+        <div>
+          <p id="mode-title" class="font-extrabold font-headline text-lg transition-colors text-on-error-container">Normal Router  --  FIFO Mode (No Algorithm)</p>
+          <p id="mode-desc" class="text-sm transition-colors opacity-90 text-on-error-container">Packets are transmitted first-come, first-served. VTOP may timeout if large downloads arrive first.</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-sm font-bold transition-colors text-on-error-container" id="mode-label-normal">Normal</span>
+        <button id="mode-toggle-btn" onclick="toggleRouterMode()" class="bg-outline transition-colors" style="width:64px;height:32px;border-radius:999px;border:none;position:relative;cursor:pointer;">
+          <div id="mode-toggle-thumb" style="width:24px;height:24px;background:#fff;border-radius:50%;position:absolute;top:4px;left:4px;transition:left 0.3s;box-shadow:0 2px 6px rgba(0,0,0,0.25);"></div>
+        </button>
+        <span class="text-sm font-bold transition-colors text-outline" id="mode-label-smart">Smart QoS</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-8">
+      <!-- LEFT: Controls -->
+      <section class="col-span-12 lg:col-span-5 space-y-6">
+        <div class="bg-surface-container-low p-8 rounded-xl space-y-8">
+          <h3 class="text-lg font-bold font-headline flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">tune</span>
+            Control Parameters
+          </h3>
+
+          <!-- Number of Packets slider -->
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <label class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider">Number of Packets</label>
+              <span id="num-packets-val" class="text-primary font-bold font-headline text-xl">9 pkts</span>
+            </div>
+            <input id="num-packets" type="range" min="5" max="200" value="15" class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer" oninput="document.getElementById(&#39;num-packets-val&#39;).textContent = this.value + &#39; pkts&#39;">
+          </div>
+
+          <!-- Bandwidth slider -->
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <label class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider">Bandwidth Limit</label>
+              <span id="bandwidth-val" class="text-primary font-bold font-headline text-xl">150 units</span>
+            </div>
+            <input id="bandwidth" type="range" min="50" max="2000" value="150" class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer" oninput="document.getElementById(&#39;bandwidth-val&#39;).textContent = this.value + &#39; units&#39;">
+          </div>
+
+          <!-- Traffic weights section -->
+          <div class="space-y-4 pt-2">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider">Custom Traffic Weights</span>
+              <button id="weights-toggle" onclick="toggleWeights()" class="toggle-track w-12 h-6 bg-surface-container-highest rounded-full relative flex items-center px-1 cursor-pointer">
+                <div class="toggle-thumb w-4 h-4 bg-outline rounded-full shadow-sm"></div>
+              </button>
+            </div>
+            <div id="weights-panel" class="hidden space-y-3 pt-2">
+              <p class="text-xs text-outline">Relative weights (higher = more frequent)</p>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-surface-container-lowest p-3 rounded-lg">
+                  <label class="text-xs font-bold text-secondary uppercase">VTOP</label>
+                  <input id="w-vtop" type="number" value="15" min="1" max="100" class="w-full mt-1 bg-transparent text-lg font-bold font-headline text-on-surface focus:outline-none border-b border-outline-variant/30">
+                </div>
+                <div class="bg-surface-container-lowest p-3 rounded-lg">
+                  <label class="text-xs font-bold text-tertiary uppercase">YouTube</label>
+                  <input id="w-youtube" type="number" value="40" min="1" max="100" class="w-full mt-1 bg-transparent text-lg font-bold font-headline text-on-surface focus:outline-none border-b border-outline-variant/30">
+                </div>
+                <div class="bg-surface-container-lowest p-3 rounded-lg">
+                  <label class="text-xs font-bold text-tertiary uppercase">Netflix</label>
+                  <input id="w-netflix" type="number" value="25" min="1" max="100" class="w-full mt-1 bg-transparent text-lg font-bold font-headline text-on-surface focus:outline-none border-b border-outline-variant/30">
+                </div>
+                <div class="bg-surface-container-lowest p-3 rounded-lg">
+                  <label class="text-xs font-bold text-error uppercase">Download</label>
+                  <input id="w-download" type="number" value="20" min="1" max="100" class="w-full mt-1 bg-transparent text-lg font-bold font-headline text-on-surface focus:outline-none border-b border-outline-variant/30">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Summary card -->
+        <div class="bg-surface-container-low p-8 rounded-xl space-y-6">
+          <h3 class="text-lg font-bold font-headline">Result Summary</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-surface-container-lowest p-6 rounded-lg text-center">
+              <p class="text-xs font-semibold text-on-surface-variant uppercase mb-2">Selected</p>
+              <p id="res-selected" class="text-3xl font-extrabold font-headline text-secondary"> -- </p>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-lg text-center">
+              <p class="text-xs font-semibold text-on-surface-variant uppercase mb-2">Dropped</p>
+              <p id="res-dropped" class="text-3xl font-extrabold font-headline text-error"> -- </p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between items-end">
+              <span class="text-sm font-semibold uppercase tracking-wider">Bandwidth Usage</span>
+              <span id="res-bw-pct" class="text-primary font-bold"> -- </span>
+            </div>
+            <div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden">
+              <div id="res-bw-bar" class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full shadow-[0_0_10px_rgba(0,88,188,0.3)] fill-animate" style="width:0%"></div>
+            </div>
+            <p id="res-bw-detail" class="text-xs text-outline text-right"> --  /  --  units</p>
+          </div>
+          <div class="bg-surface-container-lowest p-4 rounded-lg flex justify-between">
+            <span class="text-sm font-semibold">Max Priority Score</span>
+            <span id="res-priority" class="text-primary font-bold font-headline"> -- </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Packet Flow -->
+      <section class="col-span-12 lg:col-span-7 space-y-6">
+        <div class="bg-surface-container-low p-8 rounded-xl flex flex-col" style="min-height: 600px;">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-lg font-bold font-headline flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary">stream</span>
+              Live Packet Flow
+            </h3>
+            <div class="flex gap-2 flex-wrap">
+              <span class="px-2.5 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase rounded-sm">Academic</span>
+              <span class="px-2.5 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold uppercase rounded-sm">Streaming</span>
+              <span class="px-2.5 py-1 bg-error-container text-on-error-container text-[10px] font-bold uppercase rounded-sm">Dropped</span>
+            </div>
+          </div>
+
+          <!-- Loading state -->
+          <div id="flow-loading" class="flex-1 flex flex-col items-center justify-center gap-4 text-outline hidden">
+            <div class="spinner h-10 w-10 border-4 border-primary/30 border-t-primary rounded-full"></div>
+            <p class="text-sm font-medium">Running optimization…</p>
+          </div>
+
+          <!-- Empty state -->
+          <div id="flow-empty" class="flex-1 flex flex-col items-center justify-center gap-3 text-outline">
+      <span class="material-symbols-outlined text-5xl text-error opacity-50">error</span>
+      <p class="text-sm font-medium text-error">Failed to fetch</p>
+      <p class="text-xs text-outline">Is the FastAPI backend running on <strong>http://localhost:8000</strong>?</p></div>
+
+          <!-- Results tabs -->
+          <div id="flow-results" class="hidden flex-1 flex flex-col gap-4">
+            <div class="flex gap-2 border-b border-outline-variant/20 pb-2">
+              <button onclick="showTab(&#39;selected&#39;)" id="tab-selected" class="tab-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-secondary-container text-on-secondary-container">
+                Selected Packets
+              </button>
+              <button onclick="showTab(&#39;dropped&#39;)" id="tab-dropped" class="tab-btn px-4 py-2 rounded-full text-sm font-semibold transition-all text-outline hover:bg-surface-container">
+                Dropped Packets
+              </button>
+            </div>
+
+            <div id="tab-content-selected" class="flex-1 overflow-y-auto space-y-3 pr-1" style="max-height: 460px;">
+              <!-- populated by JS -->
+            </div>
+            <div id="tab-content-dropped" class="hidden flex-1 overflow-y-auto space-y-3 pr-1" style="max-height: 460px;">
+              <!-- populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<!-- =
+     PAGE: ANALYTICS
+= -->
+<main id="page-analytics" class="page ml-64 pt-16 min-h-screen">
+  <div class="p-8 space-y-8">
+    <div>
+      <h2 class="text-4xl font-extrabold font-headline text-on-surface tracking-tight">Analytics</h2>
+      <p class="text-on-surface-variant font-body text-sm mt-1">Detailed packet-level insights from last simulation</p>
+    </div>
+
+    <!-- Stat cards row -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,88,188,0.05)]">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Avg Priority (Selected)</p>
+        <p id="an-avg-pri-sel" class="text-3xl font-extrabold font-headline text-secondary"> -- </p>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(186,26,26,0.05)]">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Avg Priority (Dropped)</p>
+        <p id="an-avg-pri-drop" class="text-3xl font-extrabold font-headline text-error"> -- </p>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_20px_rgba(0,88,188,0.05)]">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Algorithm Efficiency</p>
+        <p id="an-efficiency" class="text-3xl font-extrabold font-headline text-primary"> -- </p>
+      </div>
+    </div>
+
+    <!-- Full packet table -->
+    <div class="bg-surface-container-low p-8 rounded-xl">
+      <h3 class="font-bold font-headline text-lg mb-6 flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">table_rows</span>
+        All Packets  --  Detailed View
+      </h3>
+
+      <div id="analytics-empty" class="flex flex-col items-center gap-3 py-12 text-outline">
+        <span class="material-symbols-outlined text-5xl opacity-30">dataset</span>
+        <p class="text-sm">No simulation data yet. Run a simulation first.</p>
+        <button onclick="showPage(&#39;simulation&#39;)" class="mt-2 px-5 py-2 bg-primary text-white rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors">Go to Simulation</button>
+      </div>
+
+      <div id="analytics-table-wrap" class="hidden overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left">
+              <th class="pb-4 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">ID</th>
+              <th class="pb-4 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">Type</th>
+              <th class="pb-4 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">Size</th>
+              <th class="pb-4 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">Priority</th>
+              <th class="pb-4 font-semibold text-on-surface-variant uppercase text-xs tracking-wider">Status</th>
+            </tr>
+          </thead>
+          <tbody id="analytics-tbody" class="divide-y divide-outline-variant/10">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- =
+     PAGE: DOCS
+= -->
+<main id="page-docs" class="page ml-64 pt-16 min-h-screen">
+  <div class="p-8 space-y-8 max-w-4xl">
+    <div>
+      <h2 class="text-4xl font-extrabold font-headline text-on-surface tracking-tight">Algorithm Docs</h2>
+      <p class="text-on-surface-variant font-body text-sm mt-1">Understanding the 0/1 Knapsack optimization logic</p>
+    </div>
+
+    <div class="space-y-6">
+      <div class="bg-surface-container-low p-8 rounded-xl space-y-4 shadow-sm">
+        <h3 class="font-bold font-headline text-xl text-primary flex items-center gap-2">
+          <span class="material-symbols-outlined">code</span>
+          Problem Formulation
+        </h3>
+        <p class="text-on-surface-variant leading-relaxed">
+          The Network Quality of Service (QoS) challenge is modeled as a classic <strong>0/1 Knapsack Problem</strong>. 
+          When total incoming packet sizes exceed the available bandwidth, the router must choose which packets to drop and which to transmit.
+        </p>
+        <ul class="list-disc pl-5 text-sm text-on-surface-variant space-y-2">
+          <li><strong>Capacity (W):</strong> The total bandwidth limit currently available on the router.</li>
+          <li><strong>Items (n):</strong> The incoming network packets currently in the queue.</li>
+          <li><strong>Weight (w):</strong> The byte size of each network packet.</li>
+          <li><strong>Value (v):</strong> The administrative priority score of the packet (e.g., Academic = 95, Download = 10).</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface-container-low p-8 rounded-xl space-y-6 shadow-sm">
+        <h3 class="font-bold font-headline text-xl text-secondary flex items-center gap-2">
+          <span class="material-symbols-outlined">functions</span>
+          Dynamic Programming Application
+        </h3>
+        <p class="text-sm text-on-surface-variant">We construct a 2D array <code>dp[n+1][W+1]</code> where <code>dp[i][w]</code> represents the maximum priority score achievable using a subset of the first <code>i</code> packets with a total bandwidth limit of <code>w</code>.</p>
+        
+        <div class="bg-surface-container-lowest p-4 rounded-lg overflow-x-auto shadow-inner border border-outline-variant/10">
+          <pre class="text-xs font-mono text-on-surface leading-loose">
+for i = 1 to n:
+    for w = 0 to W:
+        if weight[i] <= w:
+            dp[i][w] = max(dp[i-1][w], value[i] + dp[i-1][w - weight[i]])
+        else:
+            dp[i][w] = dp[i-1][w]
+          </pre>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 mt-6">
+          <div class="bg-secondary-container/30 p-4 rounded-lg border border-secondary/20">
+            <h4 class="font-bold text-secondary mb-1">Time Complexity</h4>
+            <p class="text-sm font-mono font-semibold">O(n * W)</p>
+            <p class="text-xs text-on-surface-variant mt-2">Pseudo-polynomial time. Efficient for reasonable bandwidth window sizes.</p>
+          </div>
+          <div class="bg-tertiary-container/30 p-4 rounded-lg border border-tertiary/20">
+            <h4 class="font-bold text-tertiary mb-1">Space Complexity</h4>
+            <p class="text-sm font-mono font-semibold">O(n * W)</p>
+            <p class="text-xs text-on-surface-variant mt-2">Required for backtracking to identify specifically which packets were selected.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- =
+     PAGE: LIBRARY TOPOLOGY
+= -->
+<main id="page-topology" class="page ml-64 pt-16 min-h-screen">
+  <div class="p-8 space-y-8">
+    <div>
+      <h2 class="text-4xl font-extrabold font-headline text-on-surface tracking-tight">Library Topology</h2>
+      <p class="text-on-surface-variant font-body text-sm mt-1">Interactive demo: See the load balancing problem, then solve it with a Min-Heap</p>
+    </div>
+
+    <!-- STEP CONTROLS -->
+    <div class="bg-surface-container-low p-6 rounded-xl space-y-6">
+      <h3 class="font-bold font-headline text-lg flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">settings_input_antenna</span>
+        Simulation Controls
+      </h3>
+
+      <div class="space-y-4">
+        <div class="flex justify-between items-center">
+          <label class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider">Number of Students Arriving</label>
+          <span id="topo-students-val" class="text-primary font-bold font-headline text-xl">300 students</span>
+        </div>
+        <input id="topo-students" type="range" min="50" max="800" value="300" class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer" oninput="document.getElementById('topo-students-val').textContent = this.value + ' students'">
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button id="step1-btn" onclick="stepShowProblem()" class="flex-1 bg-gradient-to-br from-error to-red-700 text-white px-6 py-4 rounded-xl font-bold shadow-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 text-base">
+          <span class="material-symbols-outlined text-[22px]">warning</span>
+          Step 1: Show the Problem
+        </button>
+        <button id="step2-btn" onclick="stepSolveWithHeap()" disabled class="flex-1 bg-surface-container-highest text-outline px-6 py-4 rounded-xl font-bold shadow-lg transition-all flex items-center justify-center gap-3 text-base cursor-not-allowed opacity-50">
+          <span class="material-symbols-outlined text-[22px]">auto_fix_high</span>
+          Step 2: Solve with Min-Heap
+        </button>
+      </div>
+
+      <div class="flex justify-end">
+        <button onclick="resetTopology()" class="text-sm text-outline hover:text-on-surface font-medium flex items-center gap-1 transition-colors">
+          <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+          Reset All
+        </button>
+      </div>
+    </div>
+
+    <!-- STATUS BANNER -->
+    <div id="topo-status-banner" class="rounded-xl p-5 flex items-center gap-4 border-2 transition-all duration-500 border-outline-variant/20 bg-surface-container-lowest">
+      <div id="topo-status-icon" style="font-size:2rem;">&#9898;</div>
+      <div>
+        <p id="topo-status-title" class="font-extrabold font-headline text-lg text-on-surface-variant">Waiting for Simulation</p>
+        <p id="topo-status-desc" class="text-sm text-outline">Enter number of students and click Step 1 to see the congestion problem.</p>
+      </div>
+    </div>
+
+    <!-- FLOOR PLAN -->
+    <div class="bg-surface-container-low p-8 rounded-xl">
+      <h3 class="font-bold font-headline text-lg mb-2 flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">map</span>
+        Library Floor Plan -- Wi-Fi Router Distribution
+      </h3>
+      <p class="text-xs text-outline mb-6">Each wing has its own access point. The Min-Heap ensures the least-congested router always receives the next student.</p>
+
+      <div class="flex justify-center items-center">
+        <div class="grid gap-3" style="grid-template-columns: 180px 200px 180px; grid-template-rows: 140px 160px 140px;">
+          <div></div>
+          <div id="wing-b-card" class="rounded-xl border-2 border-outline-variant/30 bg-surface-container-lowest p-4 flex flex-col items-center justify-center text-center transition-all duration-500">
+            <p class="text-xs font-bold text-outline uppercase tracking-wider">North</p>
+            <p class="font-bold font-headline text-lg text-on-surface">Wing B</p>
+            <p class="text-[10px] text-outline mt-1">Periodicals &amp; Journals</p>
+            <div class="w-full h-2 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+              <div id="wing-b-bar" class="h-full bg-primary rounded-full transition-all duration-700" style="width:0%"></div>
+            </div>
+            <p id="wing-b-load" class="text-xs font-bold text-primary mt-1">0 / 180</p>
+          </div>
+          <div></div>
+
+          <div id="wing-e-card" class="rounded-xl border-2 border-outline-variant/30 bg-surface-container-lowest p-4 flex flex-col items-center justify-center text-center transition-all duration-500">
+            <p class="text-xs font-bold text-outline uppercase tracking-wider">West</p>
+            <p class="font-bold font-headline text-lg text-on-surface">Wing E</p>
+            <p class="text-[10px] text-outline mt-1">Digital Archives</p>
+            <div class="w-full h-2 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+              <div id="wing-e-bar" class="h-full bg-primary rounded-full transition-all duration-700" style="width:0%"></div>
+            </div>
+            <p id="wing-e-load" class="text-xs font-bold text-primary mt-1">0 / 120</p>
+          </div>
+
+          <div id="wing-a-card" class="rounded-xl border-4 border-primary/40 bg-primary/5 p-4 flex flex-col items-center justify-center text-center shadow-[0_0_20px_rgba(0,88,188,0.1)] transition-all duration-500">
+            <p id="wing-a-dir" class="text-xs font-bold text-primary uppercase tracking-wider">Center</p>
+            <p class="font-extrabold font-headline text-xl text-primary">Wing A</p>
+            <p class="text-[10px] text-outline mt-1">Main Reading Hall</p>
+            <div class="w-full h-3 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+              <div id="wing-a-bar" class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full transition-all duration-700" style="width:0%"></div>
+            </div>
+            <p id="wing-a-load" class="text-xs font-bold text-primary mt-1">0 / 200</p>
+          </div>
+
+          <div id="wing-c-card" class="rounded-xl border-2 border-outline-variant/30 bg-surface-container-lowest p-4 flex flex-col items-center justify-center text-center transition-all duration-500">
+            <p class="text-xs font-bold text-outline uppercase tracking-wider">East</p>
+            <p class="font-bold font-headline text-lg text-on-surface">Wing C</p>
+            <p class="text-[10px] text-outline mt-1">Computer Lab Section</p>
+            <div class="w-full h-2 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+              <div id="wing-c-bar" class="h-full bg-primary rounded-full transition-all duration-700" style="width:0%"></div>
+            </div>
+            <p id="wing-c-load" class="text-xs font-bold text-primary mt-1">0 / 180</p>
+          </div>
+
+          <div></div>
+          <div id="wing-d-card" class="rounded-xl border-2 border-outline-variant/30 bg-surface-container-lowest p-4 flex flex-col items-center justify-center text-center transition-all duration-500">
+            <p class="text-xs font-bold text-outline uppercase tracking-wider">South</p>
+            <p class="font-bold font-headline text-lg text-on-surface">Wing D</p>
+            <p class="text-[10px] text-outline mt-1">Group Discussion Zone</p>
+            <div class="w-full h-2 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+              <div id="wing-d-bar" class="h-full bg-primary rounded-full transition-all duration-700" style="width:0%"></div>
+            </div>
+            <p id="wing-d-load" class="text-xs font-bold text-primary mt-1">0 / 150</p>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Algorithm Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm text-center">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Students Assigned</p>
+        <p id="topo-assigned" class="text-2xl font-extrabold font-headline text-secondary">--</p>
+      </div>
+      <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm text-center">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Rejected (Full)</p>
+        <p id="topo-rejected" class="text-2xl font-extrabold font-headline text-error">--</p>
+      </div>
+      <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm text-center">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Overall Load</p>
+        <p id="topo-load" class="text-2xl font-extrabold font-headline text-primary">--%</p>
+      </div>
+      <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm text-center">
+        <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Heap Ops</p>
+        <p id="topo-heapops" class="text-2xl font-extrabold font-headline text-tertiary">--</p>
+      </div>
+    </div>
+
+    <!-- Algorithm Info -->
+    <div class="bg-surface-container-low p-8 rounded-xl space-y-4 shadow-sm">
+      <h3 class="font-bold font-headline text-xl text-primary flex items-center gap-2">
+        <span class="material-symbols-outlined">data_object</span>
+        Min-Heap Algorithm
+      </h3>
+      <p class="text-on-surface-variant leading-relaxed text-sm">
+        A <strong>Min-Heap (Priority Queue)</strong> is used to always find the least-congested router in <strong>O(log R)</strong> time.
+        When a student connects, we <code>heappop()</code> the lightest router, assign the student, then <code>heappush()</code> it back.
+      </p>
+      <div class="bg-surface-container-lowest p-4 rounded-lg overflow-x-auto shadow-inner border border-outline-variant/10">
+        <pre class="text-xs font-mono text-on-surface leading-loose">
+for each student:
+    router = heapq.heappop(heap)     # O(log R)  --  get least loaded
+    router.active_users += 1
+    heapq.heappush(heap, router)     # O(log R)  --  rebalance heap
+
+Total: O(S x log R)  |  S = students, R = routers
+        </pre>
+      </div>
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <div class="bg-primary/5 p-4 rounded-lg border border-primary/20">
+          <h4 class="font-bold text-primary mb-1">Time Complexity</h4>
+          <p class="text-sm font-mono font-semibold">O(S x log R)</p>
+          <p class="text-xs text-on-surface-variant mt-2">Each of S students requires 2 heap operations on R routers.</p>
+        </div>
+        <div class="bg-tertiary-container/30 p-4 rounded-lg border border-tertiary/20">
+          <h4 class="font-bold text-tertiary mb-1">Space Complexity</h4>
+          <p class="text-sm font-mono font-semibold">O(R)</p>
+          <p class="text-xs text-on-surface-variant mt-2">Only the R router objects are stored in the heap.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</div> <!-- END MAIN APP -->
+
+
+<!-- =
+     JAVASCRIPT
+= -->
+<script>
+// - State -
+let lastResult = null;
+let weightsEnabled = false;
+let currentTab = 'selected';
+let smartModeEnabled = false;
+const API_BASE = window.location.origin;
+
+// - API Status Indicator -
+async function checkApiStatus() {
+  const dot   = document.getElementById('api-dot');
+  const label = document.getElementById('api-label');
+  const wrap  = document.getElementById('api-status');
+  try {
+    const r = await fetch(API_BASE + '/health', { signal: AbortSignal.timeout(3000) });
+    if (r.ok) {
+      dot.className   = 'w-2 h-2 rounded-full bg-secondary animate-pulse';
+      label.textContent = 'API Online';
+      label.className = 'text-[10px] font-bold uppercase tracking-wider text-on-secondary-container';
+      wrap.className  = 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary-container cursor-pointer';
+    } else { throw new Error(); }
+  } catch {
+    dot.className   = 'w-2 h-2 rounded-full bg-error animate-pulse';
+    label.textContent = 'Offline';
+    label.className = 'text-[10px] font-bold uppercase tracking-wider text-on-error-container';
+    wrap.className  = 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-error-container cursor-pointer';
+  }
+}
+
+// - Navigation -
+function showPage(name) {
+  // Map 'settings' to 'docs' page id
+  const pageId = name === 'settings' ? 'docs' : name;
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + pageId);
+  if (page) page.classList.add('active');
+
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.remove('text-primary', 'font-semibold', 'bg-primary/10');
+    b.classList.add('text-outline');
+  });
+  const btn = document.getElementById('nav-' + name);
+  if (btn) {
+    btn.classList.add('text-primary', 'font-semibold', 'bg-primary/10');
+    btn.classList.remove('text-outline');
+  }
+}
+
+// - Toggle weights -
+function toggleWeights() {
+  weightsEnabled = !weightsEnabled;
+  const btn = document.getElementById('weights-toggle');
+  const panel = document.getElementById('weights-panel');
+  if (weightsEnabled) {
+    btn.classList.add('toggle-on');
+    btn.querySelector('.toggle-thumb').classList.replace('bg-outline', 'bg-white');
+    panel.classList.remove('hidden');
+  } else {
+    btn.classList.remove('toggle-on');
+    btn.querySelector('.toggle-thumb').classList.replace('bg-white', 'bg-outline');
+    panel.classList.add('hidden');
+  }
+}
+
+// - Tabs -
+function showTab(tab) {
+  currentTab = tab;
+  const tabs = ['selected', 'dropped'];
+  tabs.forEach(t => {
+    const btn = document.getElementById('tab-' + t);
+    const content = document.getElementById('tab-content-' + t);
+    if (t === tab) {
+      btn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+      btn.classList.remove('text-outline', 'hover:bg-surface-container');
+      content.classList.remove('hidden');
+    } else {
+      btn.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+      btn.classList.add('text-outline', 'hover:bg-surface-container');
+      content.classList.add('hidden');
+    }
+  });
+}
+
+// - Packet card builder -
+function getTypeConfig(type) {
+  const map = {
+    VTOP:     { border: 'border-secondary', icon: '•', bg: 'bg-secondary-container',  fg: 'text-on-secondary-container', val: 'text-secondary', label: 'Academic' },
+    Meet:     { border: 'border-secondary', icon: '📹', bg: 'bg-secondary-container',  fg: 'text-on-secondary-container', val: 'text-secondary', label: 'Academic' },
+    Zoom:     { border: 'border-secondary', icon: '📹', bg: 'bg-secondary-container',  fg: 'text-on-secondary-container', val: 'text-secondary', label: 'Academic' },
+    YouTube:  { border: 'border-tertiary',  icon: '▶️', bg: 'bg-tertiary-container',   fg: 'text-on-tertiary-container',  val: 'text-tertiary',  label: 'Streaming' },
+    Netflix:  { border: 'border-tertiary',  icon: '🎬', bg: 'bg-tertiary-container',   fg: 'text-on-tertiary-container',  val: 'text-tertiary',  label: 'Streaming' },
+    Download: { border: 'border-error',     icon: '⬇️', bg: 'bg-error-container',      fg: 'text-on-error-container',     val: 'text-error',     label: 'Download' },
+  };
+  return map[type] || { border: 'border-outline', icon: '📦', bg: 'bg-surface-container', fg: 'text-on-surface-variant', val: 'text-on-surface', label: type };
+}
+
+function buildPacketCard(p, dropped, delay) {
+  const cfg = dropped
+    ? { border: 'border-error', icon: 'âŒ', bg: 'bg-error-container', fg: 'text-on-error-container', val: 'text-error', label: 'Dropped' }
+    : getTypeConfig(p.packet_type);
+
+  return `
+    <div class="packet-card bg-surface-container-lowest p-4 rounded-lg border-l-4 ${cfg.border} flex items-center justify-between shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:translate-x-1 transition-transform cursor-default"
+         style="animation-delay: ${delay}ms">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-full ${cfg.bg} flex items-center justify-center flex-shrink-0 text-lg">
+          ${cfg.icon}
+        </div>
+        <div>
+          <p class="font-semibold text-on-surface text-sm">#${p.id}  --  ${p.packet_type}</p>
+          <p class="text-xs text-on-surface-variant">Size: ${p.size} units &nbsp;·&nbsp; Priority: ${p.priority}</p>
+        </div>
+      </div>
+      <div class="text-right flex-shrink-0">
+        <p class="font-bold text-sm ${cfg.val}">${p.priority} pts</p>
+        <p class="text-[10px] font-bold uppercase ${cfg.val}">${cfg.label}</p>
+      </div>
+    </div>`;
+}
+
+// - Router Mode Toggle -
+function toggleRouterMode() {
+  smartModeEnabled = !smartModeEnabled;
+  const banner   = document.getElementById('mode-banner');
+  const icon     = document.getElementById('mode-icon');
+  const title    = document.getElementById('mode-title');
+  const desc     = document.getElementById('mode-desc');
+  const thumb    = document.getElementById('mode-toggle-thumb');
+  const lblNorm  = document.getElementById('mode-label-normal');
+  const lblSmart = document.getElementById('mode-label-smart');
+  const btn      = document.getElementById('mode-toggle-btn');
+
+  if (smartModeEnabled) {
+    banner.className = "rounded-xl p-5 flex items-center justify-between border-2 transition-colors border-secondary bg-secondary-container";
+    icon.textContent = '🟢';
+    title.textContent = 'Smart QoS  --  0/1 Knapsack Mode (Algorithm Active)';
+    title.className = 'font-extrabold font-headline text-lg transition-colors text-on-secondary-container';
+    desc.textContent = 'Algorithm selects the optimal packet subset. VTOP always prioritized. Maximum academic utility guaranteed.';
+    desc.className = 'text-sm transition-colors opacity-90 text-on-secondary-container';
+    btn.className = 'transition-colors bg-secondary';
+    lblNorm.className = 'text-sm font-bold transition-colors text-outline';
+    lblSmart.className = 'text-sm font-bold transition-colors text-on-secondary-container';
+    thumb.style.left = '36px';
+  } else {
+    banner.className = "rounded-xl p-5 flex items-center justify-between border-2 transition-colors border-error bg-error-container";
+    icon.textContent = '🔴';
+    title.textContent = 'Normal Router  --  FIFO Mode (No Algorithm)';
+    title.className = 'font-extrabold font-headline text-lg transition-colors text-on-error-container';
+    desc.textContent = 'Packets are transmitted first-come, first-served. VTOP may timeout if large downloads arrive first.';
+    desc.className = 'text-sm transition-colors opacity-90 text-on-error-container';
+    btn.className = 'transition-colors bg-outline';
+    lblNorm.className = 'text-sm font-bold transition-colors text-on-error-container';
+    lblSmart.className = 'text-sm font-bold transition-colors text-outline';
+    thumb.style.left = '4px';
+  }
+}
+
+// - Run Simulation (calls Python backend) -
+async function runSimulation() {
+  const numPackets = parseInt(document.getElementById('num-packets').value);
+  const bandwidth  = parseInt(document.getElementById('bandwidth').value);
+
+  // Build weights object if enabled
+  let weights = null;
+  if (weightsEnabled) {
+    weights = {
+      VTOP:     parseInt(document.getElementById('w-vtop').value) || 15,
+      YouTube:  parseInt(document.getElementById('w-youtube').value) || 30,
+      Netflix:  parseInt(document.getElementById('w-netflix').value) || 20,
+      Download: parseInt(document.getElementById('w-download').value) || 25,
+    };
+  }
+
+  // Show loading state
+  document.getElementById('flow-empty').classList.add('hidden');
+  document.getElementById('flow-results').classList.add('hidden');
+  document.getElementById('flow-loading').classList.remove('hidden');
+  document.getElementById('run-btn').disabled = true;
+  document.getElementById('run-btn').innerHTML = '<div class="spinner h-4 w-4 border-2 border-white/30 border-t-white rounded-full"></div> Running…';
+
+  try {
+    // Step 1: Generate packets from Python backend
+    const genResp = await fetch(API_BASE + '/generate-packets', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ num_packets: numPackets, weights: weights })
+    });
+    if (!genResp.ok) throw new Error('Failed to generate packets');
+    const { packets: generatedPackets } = await genResp.json();
+
+    // Step 2: Optimize or FIFO via Python backend
+    const endpoint = smartModeEnabled ? '/optimize' : '/fifo-simulate';
+    const optResp = await fetch(API_BASE + endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ packets: generatedPackets, bandwidth_limit: bandwidth })
+    });
+    if (!optResp.ok) throw new Error('Optimization failed');
+    const result = await optResp.json();
+
+    lastResult = { ...result, all_packets: generatedPackets };
+    renderResults(result, generatedPackets);
+
+  } catch (err) {
+    document.getElementById('flow-loading').classList.add('hidden');
+    document.getElementById('flow-empty').classList.remove('hidden');
+    document.getElementById('flow-empty').innerHTML = `
+      <span class="material-symbols-outlined text-5xl text-error opacity-50">error</span>
+      <p class="text-sm font-medium text-error">Failed to connect to backend</p>
+      <p class="text-xs text-outline">Is the Python server running? <strong>python server.py</strong></p>`;
+  } finally {
+    document.getElementById('run-btn').disabled = false;
+    document.getElementById('run-btn').innerHTML = '<span class="material-symbols-outlined">play_arrow</span> Run Simulation';
+  }
+}
+
+function renderResults(result, allPackets) {
+  document.getElementById('flow-loading').classList.add('hidden');
+  document.getElementById('flow-results').classList.remove('hidden');
+
+  const selContainer = document.getElementById('tab-content-selected');
+  selContainer.innerHTML = result.selected_packets.map((p, i) => buildPacketCard(p, false, i * 30)).join('');
+
+  const dropContainer = document.getElementById('tab-content-dropped');
+  dropContainer.innerHTML = result.dropped_packets.map((p, i) => buildPacketCard(p, true, i * 30)).join('');
+
+  document.getElementById('tab-selected').textContent = `Selected Packets (${result.selected_count})`;
+  document.getElementById('tab-dropped').textContent  = `Dropped Packets (${result.dropped_count})`;
+  showTab('selected');
+
+  document.getElementById('res-selected').textContent = result.selected_count;
+  document.getElementById('res-dropped').textContent  = result.dropped_count;
+  const pct = result.bandwidth_utilization;
+  document.getElementById('res-bw-pct').textContent    = pct + '%';
+  document.getElementById('res-bw-bar').style.width    = Math.min(pct, 100) + '%';
+  document.getElementById('res-bw-detail').textContent = `${result.total_bandwidth_used} / ${result.bandwidth_limit} units`;
+  document.getElementById('res-priority').textContent  = result.max_priority;
+
+  updateDashboard(result, allPackets);
+  updateAnalytics(result, allPackets);
+}
+
+function updateDashboard(result, allPackets) {
+  document.getElementById('dash-total').textContent    = allPackets.length;
+  document.getElementById('dash-selected').textContent = result.selected_count;
+  document.getElementById('dash-dropped').textContent  = result.dropped_count;
+  document.getElementById('dash-priority').textContent = result.max_priority;
+
+  const pct = result.bandwidth_utilization;
+  document.getElementById('dash-bw-pct').textContent   = pct + '%';
+  document.getElementById('dash-bw-bar').style.width   = Math.min(pct, 100) + '%';
+  document.getElementById('dash-bw-label').textContent = `${result.total_bandwidth_used} / ${result.bandwidth_limit} units`;
+  document.getElementById('dash-bw-max').textContent   = result.bandwidth_limit;
+
+  const counts = {};
+  result.selected_packets.forEach(p => { counts[p.packet_type] = (counts[p.packet_type] || 0) + 1; });
+  const typeColors = { VTOP: 'text-secondary', Zoom: 'text-secondary', YouTube: 'text-tertiary', Netflix: 'text-tertiary', Download: 'text-error' };
+  document.getElementById('dash-breakdown').innerHTML = Object.entries(counts).map(([type, cnt]) => `
+    <div class="bg-surface-container-lowest p-4 rounded-lg text-center">
+      <p class="text-xs font-bold text-on-surface-variant uppercase mb-1">${type}</p>
+      <p class="text-2xl font-extrabold font-headline ${typeColors[type] || 'text-primary'}">${cnt}</p>
+    </div>`).join('');
+}
+
+function updateAnalytics(result, allPackets) {
+  const selSet = new Set(result.selected_packets.map(p => p.id));
+
+  const avgPri = arr => arr.length ? Math.round(arr.reduce((s, p) => s + p.priority, 0) / arr.length) : 0;
+  document.getElementById('an-avg-pri-sel').textContent  = avgPri(result.selected_packets);
+  document.getElementById('an-avg-pri-drop').textContent = avgPri(result.dropped_packets);
+
+  const efficiency = allPackets.length > 0
+    ? Math.round(result.selected_count / allPackets.length * 100) + '%'
+    : ' -- ';
+  document.getElementById('an-efficiency').textContent = efficiency;
+
+  document.getElementById('analytics-empty').classList.add('hidden');
+  document.getElementById('analytics-table-wrap').classList.remove('hidden');
+
+  const tbody = document.getElementById('analytics-tbody');
+  const typeColors = { VTOP: 'text-secondary', Zoom: 'text-secondary', YouTube: 'text-tertiary', Netflix: 'text-tertiary', Download: 'text-error' };
+  tbody.innerHTML = allPackets.map(p => {
+    const sel = selSet.has(p.id);
+    return `
+      <tr class="${sel ? '' : 'opacity-60'}">
+        <td class="py-3 font-mono text-xs text-outline">#${p.id}</td>
+        <td class="py-3"><span class="font-semibold ${typeColors[p.packet_type] || ''}">${p.packet_type}</span></td>
+        <td class="py-3 font-mono text-sm">${p.size} u</td>
+        <td class="py-3 font-mono text-sm font-bold">${p.priority}</td>
+        <td class="py-3">
+          <span class="px-2.5 py-1 rounded-sm text-[10px] font-bold uppercase ${sel ? 'bg-secondary-container text-on-secondary-container' : 'bg-error-container text-on-error-container'}">
+            ${sel ? 'Selected' : 'Dropped'}
+          </span>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+// - Library Topology: Two-Step Demo -
+let topoCurrentStudents = 0;
+
+function updateWingUI(routers) {
+  const wingMap = {
+    'Wing A': { bar: 'wing-a-bar', load: 'wing-a-load', card: 'wing-a-card' },
+    'Wing B': { bar: 'wing-b-bar', load: 'wing-b-load', card: 'wing-b-card' },
+    'Wing C': { bar: 'wing-c-bar', load: 'wing-c-load', card: 'wing-c-card' },
+    'Wing D': { bar: 'wing-d-bar', load: 'wing-d-load', card: 'wing-d-card' },
+    'Wing E': { bar: 'wing-e-bar', load: 'wing-e-load', card: 'wing-e-card' },
+  };
+
+  for (const router of routers) {
+    const ids = wingMap[router.name];
+    if (!ids) continue;
+
+    const pct = router.load_percentage;
+    document.getElementById(ids.bar).style.width = pct + '%';
+    document.getElementById(ids.load).textContent = router.active_users + ' / ' + router.capacity;
+
+    // Color-code bars
+    const bar = document.getElementById(ids.bar);
+    if (pct > 85) {
+      bar.className = 'h-full bg-error rounded-full transition-all duration-700';
+    } else if (pct > 60) {
+      bar.className = 'h-full bg-tertiary rounded-full transition-all duration-700';
+    } else if (pct > 0) {
+      bar.className = 'h-full bg-primary rounded-full transition-all duration-700';
+    }
+
+    // Special: Wing A gradient when healthy
+    if (router.name === 'Wing A') {
+      if (pct > 85) bar.className = 'h-full bg-error rounded-full transition-all duration-700';
+      else if (pct > 0) bar.className = 'h-full bg-gradient-to-r from-primary to-primary-container rounded-full transition-all duration-700';
+    }
+
+    // Card border highlight for overloaded
+    const card = document.getElementById(ids.card);
+    if (pct >= 100) {
+      card.className = card.className.replace(/border-outline-variant\/30/g, '').replace(/border-primary\/40/g, '');
+      if (!card.className.includes('border-error')) {
+        card.classList.add('border-error', 'shadow-[0_0_20px_rgba(186,26,26,0.2)]');
+      }
+    }
+  }
+}
+
+async function stepShowProblem() {
+  const numStudents = parseInt(document.getElementById('topo-students').value);
+  topoCurrentStudents = numStudents;
+
+  const btn = document.getElementById('step1-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner h-4 w-4 border-2 border-white/30 border-t-white rounded-full"></div> Simulating...';
+
+  try {
+    const resp = await fetch(API_BASE + '/simulate-unbalanced', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ num_students: numStudents })
+    });
+    if (!resp.ok) throw new Error('Failed');
+    const data = await resp.json();
+
+    // Update wing visuals
+    updateWingUI(data.routers);
+
+    // Update stats
+    document.getElementById('topo-assigned').textContent = data.assignments_made;
+    document.getElementById('topo-rejected').textContent = data.students_rejected;
+    document.getElementById('topo-load').textContent = data.overall_load_pct + '%';
+    document.getElementById('topo-heapops').textContent = '0';
+
+    // Update status banner - PROBLEM state
+    const banner = document.getElementById('topo-status-banner');
+    banner.className = 'rounded-xl p-5 flex items-center gap-4 border-2 transition-all duration-500 border-error bg-error-container';
+    document.getElementById('topo-status-icon').innerHTML = '&#128308;';
+    const titleEl = document.getElementById('topo-status-title');
+    titleEl.textContent = 'PROBLEM: Wing A is Overloaded!';
+    titleEl.className = 'font-extrabold font-headline text-lg text-on-error-container';
+    const descEl = document.getElementById('topo-status-desc');
+    descEl.className = 'text-sm text-on-error-container opacity-90';
+    if (numStudents > 200) {
+      descEl.textContent = numStudents + ' students all rushed to Wing A (cap: 200). ' + data.students_rejected + ' students rejected! Wings B-E sit completely empty. No algorithm = total chaos.';
+    } else {
+      descEl.textContent = numStudents + ' students all went to Wing A (cap: 200). Wing A at ' + data.bottleneck.load_percentage + '% while Wings B-E sit completely empty. This is extremely inefficient!';
+    }
+
+    // Enable Step 2
+    const step2 = document.getElementById('step2-btn');
+    step2.disabled = false;
+    step2.className = 'flex-1 bg-gradient-to-br from-secondary to-green-700 text-white px-6 py-4 rounded-xl font-bold shadow-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 text-base cursor-pointer opacity-100';
+
+  } catch (err) {
+    alert('Could not reach backend. Is python server.py running?');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[22px]">warning</span> Step 1: Show the Problem';
+  }
+}
+
+async function stepSolveWithHeap() {
+  const btn = document.getElementById('step2-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner h-4 w-4 border-2 border-white/30 border-t-white rounded-full"></div> Balancing...';
+
+  try {
+    const resp = await fetch(API_BASE + '/rebalance-heap', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ num_students: topoCurrentStudents })
+    });
+    if (!resp.ok) throw new Error('Failed');
+    const data = await resp.json();
+
+    // Reset card borders first
+    ['wing-a-card','wing-b-card','wing-c-card','wing-d-card','wing-e-card'].forEach(id => {
+      const c = document.getElementById(id);
+      c.classList.remove('border-error', 'shadow-[0_0_20px_rgba(186,26,26,0.2)]');
+    });
+
+    // Restore Wing A special styling
+    const wingACard = document.getElementById('wing-a-card');
+    wingACard.className = 'rounded-xl border-4 border-primary/40 bg-primary/5 p-4 flex flex-col items-center justify-center text-center shadow-[0_0_20px_rgba(0,88,188,0.1)] transition-all duration-500';
+
+    // Update wing visuals with balanced data
+    updateWingUI(data.routers);
+
+    // Update stats
+    document.getElementById('topo-assigned').textContent = data.assignments_made;
+    document.getElementById('topo-rejected').textContent = data.students_rejected;
+    document.getElementById('topo-load').textContent = data.overall_load_pct + '%';
+    document.getElementById('topo-heapops').textContent = data.heap_operations;
+
+    // Update status banner - SOLVED state
+    const banner = document.getElementById('topo-status-banner');
+    banner.className = 'rounded-xl p-5 flex items-center gap-4 border-2 transition-all duration-500 border-secondary bg-secondary-container';
+    document.getElementById('topo-status-icon').innerHTML = '&#128994;';
+    const titleEl = document.getElementById('topo-status-title');
+    titleEl.textContent = 'SOLVED: Min-Heap Balanced All Wings!';
+    titleEl.className = 'font-extrabold font-headline text-lg text-on-secondary-container';
+    const descEl = document.getElementById('topo-status-desc');
+    descEl.className = 'text-sm text-on-secondary-container opacity-90';
+    descEl.textContent = topoCurrentStudents + ' students evenly distributed across all 5 wings using ' + data.heap_operations + ' heap operations. ' + data.assignments_made + ' assigned, ' + data.students_rejected + ' rejected (only if ALL routers full). O(S x log R) efficiency!';
+
+  } catch (err) {
+    alert('Could not reach backend. Is python server.py running?');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[22px]">auto_fix_high</span> Step 2: Solve with Min-Heap';
+  }
+}
+
+function resetTopology() {
+  // Reset all wing bars to 0
+  ['a','b','c','d','e'].forEach(w => {
+    document.getElementById('wing-' + w + '-bar').style.width = '0%';
+  });
+  const caps = { a: 200, b: 180, c: 180, d: 150, e: 120 };
+  Object.entries(caps).forEach(([w, cap]) => {
+    document.getElementById('wing-' + w + '-load').textContent = '0 / ' + cap;
+  });
+
+  // Reset Wing A card
+  const wingACard = document.getElementById('wing-a-card');
+  wingACard.className = 'rounded-xl border-4 border-primary/40 bg-primary/5 p-4 flex flex-col items-center justify-center text-center shadow-[0_0_20px_rgba(0,88,188,0.1)] transition-all duration-500';
+
+  // Reset other cards
+  ['b','c','d','e'].forEach(w => {
+    const c = document.getElementById('wing-' + w + '-card');
+    c.classList.remove('border-error', 'shadow-[0_0_20px_rgba(186,26,26,0.2)]');
+  });
+
+  // Reset bar colors
+  document.getElementById('wing-a-bar').className = 'h-full bg-gradient-to-r from-primary to-primary-container rounded-full transition-all duration-700';
+  ['b','c','d','e'].forEach(w => {
+    document.getElementById('wing-' + w + '-bar').className = 'h-full bg-primary rounded-full transition-all duration-700';
+  });
+
+  // Reset stats
+  document.getElementById('topo-assigned').textContent = '--';
+  document.getElementById('topo-rejected').textContent = '--';
+  document.getElementById('topo-load').textContent = '--%';
+  document.getElementById('topo-heapops').textContent = '--';
+
+  // Reset banner
+  const banner = document.getElementById('topo-status-banner');
+  banner.className = 'rounded-xl p-5 flex items-center gap-4 border-2 transition-all duration-500 border-outline-variant/20 bg-surface-container-lowest';
+  document.getElementById('topo-status-icon').innerHTML = '&#9898;';
+  document.getElementById('topo-status-title').textContent = 'Waiting for Simulation';
+  document.getElementById('topo-status-title').className = 'font-extrabold font-headline text-lg text-on-surface-variant';
+  document.getElementById('topo-status-desc').textContent = 'Enter number of students and click Step 1 to see the congestion problem.';
+  document.getElementById('topo-status-desc').className = 'text-sm text-outline';
+
+  // Disable Step 2
+  const step2 = document.getElementById('step2-btn');
+  step2.disabled = true;
+  step2.className = 'flex-1 bg-surface-container-highest text-outline px-6 py-4 rounded-xl font-bold shadow-lg transition-all flex items-center justify-center gap-3 text-base cursor-not-allowed opacity-50';
+  step2.innerHTML = '<span class="material-symbols-outlined text-[22px]">auto_fix_high</span> Step 2: Solve with Min-Heap';
+
+  topoCurrentStudents = 0;
+}
+
+// Keep old function as alias for backward compatibility
+function triggerLoadSpike() { stepShowProblem(); }
+
+// - Navigation -
+function startApp() {
+  const landing = document.getElementById('landing-page');
+  const mainApp = document.getElementById('main-app');
+
+  landing.classList.add('hidden');
+  mainApp.classList.remove('hidden');
+  setTimeout(() => {
+    mainApp.classList.remove('opacity-0');
+  }, 50);
+
+  showPage('dashboard');
+  checkApiStatus();
+}
+
+// - Dark Mode -
+function toggleDarkMode() {
+  const html = document.documentElement;
+  const isDark = html.classList.toggle('dark');
+  localStorage.setItem('netqos-theme', isDark ? 'dark' : 'light');
+  updateDarkModeUI(isDark);
+}
+
+function updateDarkModeUI(isDark) {
+  const icon = document.getElementById('dark-icon');
+  const label = document.getElementById('dark-label');
+  const track = document.getElementById('dark-toggle-track');
+  const thumb = document.getElementById('dark-toggle-thumb');
+  if (!icon) return;
+  if (isDark) {
+    icon.textContent = 'light_mode';
+    label.textContent = 'Light Mode';
+    track.style.background = '#0058bc';
+    thumb.style.transform = 'translateX(20px)';
+  } else {
+    icon.textContent = 'dark_mode';
+    label.textContent = 'Dark Mode';
+    track.style.background = '';
+    thumb.style.transform = '';
+  }
+}
+
+// Apply saved theme on load
+(function() {
+  const saved = localStorage.getItem('netqos-theme');
+  if (saved === 'dark') {
+    document.documentElement.classList.add('dark');
+    window.addEventListener('DOMContentLoaded', () => updateDarkModeUI(true));
+  }
+})();
+</script>
+
+
+</body></html>
