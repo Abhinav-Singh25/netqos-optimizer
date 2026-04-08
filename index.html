@@ -642,7 +642,7 @@
   <div class="p-8 space-y-8 max-w-4xl">
     <div>
       <h2 class="text-4xl font-extrabold font-headline text-on-surface tracking-tight">Algorithm Docs</h2>
-      <p class="text-on-surface-variant font-body text-sm mt-1">Understanding the 0/1 Knapsack optimization logic</p>
+      <p class="text-on-surface-variant font-body text-sm mt-1">Understanding the 0/1 Knapsack and Min-Heap optimization algorithms</p>
     </div>
 
     <div class="space-y-6">
@@ -694,6 +694,40 @@ for i = 1 to n:
           </div>
         </div>
       </div>
+
+<!-- Algorithm Info -->
+    <div class="bg-surface-container-low p-8 rounded-xl space-y-4 shadow-sm">
+      <h3 class="font-bold font-headline text-xl text-primary flex items-center gap-2">
+        <span class="material-symbols-outlined">data_object</span>
+        Min-Heap Algorithm
+      </h3>
+      <p class="text-on-surface-variant leading-relaxed text-sm">
+        A <strong>Min-Heap (Priority Queue)</strong> is used to always find the least-congested router in <strong>O(log R)</strong> time.
+        When a student connects, we <code>heappop()</code> the lightest router, assign the student, then <code>heappush()</code> it back.
+      </p>
+      <div class="bg-surface-container-lowest p-4 rounded-lg overflow-x-auto shadow-inner border border-outline-variant/10">
+        <pre class="text-xs font-mono text-on-surface leading-loose">
+for each student:
+    router = heapq.heappop(heap)     # O(log R)  --  get least loaded
+    router.active_users += 1
+    heapq.heappush(heap, router)     # O(log R)  --  rebalance heap
+
+Total: O(S x log R)  |  S = students, R = routers
+        </pre>
+      </div>
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <div class="bg-primary/5 p-4 rounded-lg border border-primary/20">
+          <h4 class="font-bold text-primary mb-1">Time Complexity</h4>
+          <p class="text-sm font-mono font-semibold">O(S x log R)</p>
+          <p class="text-xs text-on-surface-variant mt-2">Each of S students requires 2 heap operations on R routers.</p>
+        </div>
+        <div class="bg-tertiary-container/30 p-4 rounded-lg border border-tertiary/20">
+          <h4 class="font-bold text-tertiary mb-1">Space Complexity</h4>
+          <p class="text-sm font-mono font-semibold">O(R)</p>
+          <p class="text-xs text-on-surface-variant mt-2">Only the R router objects are stored in the heap.</p>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </main>
@@ -838,42 +872,8 @@ for i = 1 to n:
       </div>
     </div>
 
-    <!-- Algorithm Info -->
-    <div class="bg-surface-container-low p-8 rounded-xl space-y-4 shadow-sm">
-      <h3 class="font-bold font-headline text-xl text-primary flex items-center gap-2">
-        <span class="material-symbols-outlined">data_object</span>
-        Min-Heap Algorithm
-      </h3>
-      <p class="text-on-surface-variant leading-relaxed text-sm">
-        A <strong>Min-Heap (Priority Queue)</strong> is used to always find the least-congested router in <strong>O(log R)</strong> time.
-        When a student connects, we <code>heappop()</code> the lightest router, assign the student, then <code>heappush()</code> it back.
-      </p>
-      <div class="bg-surface-container-lowest p-4 rounded-lg overflow-x-auto shadow-inner border border-outline-variant/10">
-        <pre class="text-xs font-mono text-on-surface leading-loose">
-for each student:
-    router = heapq.heappop(heap)     # O(log R)  --  get least loaded
-    router.active_users += 1
-    heapq.heappush(heap, router)     # O(log R)  --  rebalance heap
-
-Total: O(S x log R)  |  S = students, R = routers
-        </pre>
       </div>
-      <div class="grid grid-cols-2 gap-4 mt-4">
-        <div class="bg-primary/5 p-4 rounded-lg border border-primary/20">
-          <h4 class="font-bold text-primary mb-1">Time Complexity</h4>
-          <p class="text-sm font-mono font-semibold">O(S x log R)</p>
-          <p class="text-xs text-on-surface-variant mt-2">Each of S students requires 2 heap operations on R routers.</p>
-        </div>
-        <div class="bg-tertiary-container/30 p-4 rounded-lg border border-tertiary/20">
-          <h4 class="font-bold text-tertiary mb-1">Space Complexity</h4>
-          <p class="text-sm font-mono font-semibold">O(R)</p>
-          <p class="text-xs text-on-surface-variant mt-2">Only the R router objects are stored in the heap.</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</main>
+</main>in>
 
 </div> <!-- END MAIN APP -->
 
